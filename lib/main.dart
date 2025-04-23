@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'app/routes/app_pages.dart'; // Mengimpor file app_pages.dart
 import 'app/widgets/splash_screen.dart';
-import 'package:tabungin/app/modules/login-register/views/login_register_view.dart';
-import 'package:tabungin/app/modules/welcome_page/views/welcome_page_view.dart';
-
 
 
 void main() {

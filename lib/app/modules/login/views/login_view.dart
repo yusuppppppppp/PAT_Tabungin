@@ -19,13 +19,13 @@ class LoginView extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(100.0),
                 ),
-                 boxShadow: [
+                boxShadow: [
                   BoxShadow(
                     color: Colors.black26, // Warna bayangan
                     offset: Offset(0, 5), // Arah bayangan
                     blurRadius: 10, // Radius bayangan
                   ),
-                 ]
+                ],
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -124,20 +124,27 @@ class LoginView extends StatelessWidget {
                   ),
                   SizedBox(height: 16.0),
                   // Teks "Sign in with Google"
-                  TextButton.icon(
+                  TextButton(
                     onPressed: () {
                       // Logika Sign in with Google
                     },
-                    icon: Icon(
-                      Icons.login,
-                      color: Colors.blue,
-                    ),
-                    label: Text(
-                      "Sign in with Google",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Sign in with Google",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(width: 8.0), // Jarak antara teks dan ikon
+                        Image.asset(
+                          'assets/icon/login/web_light_rd_na.png', // Ganti dengan path ikon Anda
+                          width: 24.0,
+                          height: 24.0,
+                        ),
+                      ],
                     ),
                   ),
                 ],
