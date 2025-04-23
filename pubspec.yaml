@@ -64,6 +64,8 @@ flutter:
    - assets/image/splash_screen/
    - assets/image/login-register/
    - assets/image/login/
+   - assets/icon/login/
+   - assets/image/register/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
