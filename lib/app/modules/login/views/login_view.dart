@@ -1,19 +1,103 @@
 import 'package:flutter/material.dart';
+import 'package:tabungin/app/modules/home/views/home_view.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
+  void _showGoogleAccountSelectionPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+        contentPadding: EdgeInsets.zero,
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 16.0),
+              child: Column(
+                children: [
+                  Icon(Icons.account_circle, size: 40.0, color: Colors.amber),
+                  SizedBox(height: 8.0),
+                  Text(
+                    "Choose an account",
+                    style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 4.0),
+                  Text(
+                    "to continue to Company",
+                    style: TextStyle(fontSize: 14.0, color: Colors.black54),
+                  ),
+                ],
+              ),
+            ),
+            Divider(),
+            ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.blueGrey,
+                child: Text("S", style: TextStyle(color: Colors.white)),
+              ),
+              title: Text("Still_water"),
+              subtitle: Text("Still_water@gmail.com"),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeView()),
+                );
+              },
+            ),
+            ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.orange,
+                child: Text("M", style: TextStyle(color: Colors.white)),
+              ),
+              title: Text("Manggo"),
+              subtitle: Text("Manggo@gmail.com"),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeView()),
+                );
+              },
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.add_circle_outline),
+              title: Text("Use another account"),
+              onTap: () {
+                Navigator.of(context).pop();
+                // Simulate another account selection
+              },
+            ),
+          ],
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: Text(
+              "To continue, Google will share your name, email address, language preference, and profile picture with Company.",
+              style: TextStyle(fontSize: 12.0, color: Colors.black54),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true, // Memastikan layar bisa disesuaikan dengan keyboard
-      backgroundColor: Colors.white, // Warna latar belakang menjadi putih
-      body: SingleChildScrollView( // Membungkus seluruh layar agar bisa di-scroll
+      resizeToAvoidBottomInset: true,
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.6, // Bagian atas (40% tinggi layar)
+              height: MediaQuery.of(context).size.height * 0.6,
               decoration: BoxDecoration(
                 color: Color(0xFFFFC300),
                 borderRadius: BorderRadius.only(
@@ -21,9 +105,9 @@ class LoginView extends StatelessWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black26, // Warna bayangan
-                    offset: Offset(0, 5), // Arah bayangan
-                    blurRadius: 10, // Radius bayangan
+                    color: Colors.black26,
+                    offset: Offset(0, 5),
+                    blurRadius: 10,
                   ),
                 ],
               ),
@@ -33,7 +117,7 @@ class LoginView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Image.asset(
-                      'assets/image/login/login.png', // Ganti dengan path gambar Anda
+                      'assets/image/login/login.png',
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -45,8 +129,7 @@ class LoginView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SizedBox(height: 16.0), // Memberikan sedikit ruang sebelum input Email
-                  // Input Email
+                  SizedBox(height: 16.0),
                   Text(
                     "Email",
                     style: TextStyle(
@@ -61,19 +144,18 @@ class LoginView extends StatelessWidget {
                       hintText: "Enter your Email here",
                       hintStyle: TextStyle(color: Colors.grey),
                       filled: true,
-                      fillColor: Color(0xFFFFE082), // Warna field
+                      fillColor: Color(0xFFFFE082),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.0),
-                        borderSide: BorderSide(color: const Color.fromARGB(255, 21, 27, 69)),
+                        borderSide: BorderSide(color: Colors.black),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.0),
-                        borderSide: BorderSide(color: const Color.fromARGB(255, 0, 0, 0)),
+                        borderSide: BorderSide(color: Colors.black),
                       ),
                     ),
                   ),
                   SizedBox(height: 16.0),
-                  // Input Password
                   Text(
                     "Password",
                     style: TextStyle(
@@ -89,22 +171,24 @@ class LoginView extends StatelessWidget {
                       hintText: "Enter your Password here",
                       hintStyle: TextStyle(color: Colors.grey),
                       filled: true,
-                      fillColor: Color(0xFFFFE082), // Warna field
+                      fillColor: Color(0xFFFFE082),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.0),
-                        borderSide: BorderSide(color: const Color.fromARGB(255, 21, 27, 69)),
+                        borderSide: BorderSide(color: Colors.black),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.0),
-                        borderSide: BorderSide(color: const Color.fromARGB(255, 0, 0, 0)),
+                        borderSide: BorderSide(color: Colors.black),
                       ),
                     ),
                   ),
                   SizedBox(height: 10.0),
-                  // Tombol LOGIN
                   ElevatedButton(
                     onPressed: () {
-                      // Logika login
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeView()),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF252D70),
@@ -123,11 +207,8 @@ class LoginView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 16.0),
-                  // Teks "Sign in with Google"
                   TextButton(
-                    onPressed: () {
-                      // Logika Sign in with Google
-                    },
+                    onPressed: () => _showGoogleAccountSelectionPopup(context),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -138,9 +219,9 @@ class LoginView extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(width: 8.0), // Jarak antara teks dan ikon
+                        SizedBox(width: 8.0),
                         Image.asset(
-                          'assets/icon/login/web_light_rd_na.png', // Ganti dengan path ikon Anda
+                          'assets/icon/login/web_light_rd_na.png',
                           width: 24.0,
                           height: 24.0,
                         ),

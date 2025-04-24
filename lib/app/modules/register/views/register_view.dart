@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tabungin/app/modules/login/views/login_view.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
@@ -35,7 +36,6 @@ class RegisterView extends StatelessWidget {
                       ],
                     ),
                   ),
-
                   // Gambar di atas latar belakang
                   Positioned(
                     top: 70,
@@ -145,7 +145,11 @@ class RegisterView extends StatelessWidget {
                   // Tombol REGISTER
                   ElevatedButton(
                     onPressed: () {
-                      // Logika register
+                      // Navigasi ke halaman LoginView
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const LoginView()),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF252D70),
@@ -174,7 +178,11 @@ class RegisterView extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          // Logika navigasi ke halaman login
+                          // Navigasi ke halaman LoginView
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const LoginView()),
+                          );
                         },
                         child: const Text(
                           "Login disini",
