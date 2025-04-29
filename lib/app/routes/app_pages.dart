@@ -10,23 +10,28 @@ import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/welcome_page/bindings/welcome_page_binding.dart';
 import '../modules/welcome_page/views/welcome_page_view.dart';
+import '../widgets/splash_screen.dart'; // Tambahkan SplashScreen
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.SPLASH_SCREEN; // Ubah ke SPLASH_SCREEN
 
   static final routes = [
     GetPage(
+      name: Routes.SPLASH_SCREEN, // Route untuk SplashScreen
+      page: () => const SplashScreen(),
+    ),
+    GetPage(
       name: _Paths.HOME,
-      page: () => HomeView(), // Hapus const jika widget bukan const
+      page: () => const HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
       name: _Paths.WELCOME_PAGE,
-      page: () => WelcomePageView(), // Hapus const jika widget bukan const
+      page: () => WelcomePageView(),
       binding: WelcomePageBinding(),
     ),
     GetPage(

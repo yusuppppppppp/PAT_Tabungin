@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'app/routes/app_pages.dart'; // Mengimpor file app_pages.dart
-import 'app/widgets/splash_screen.dart';
-
+import 'app/routes/app_pages.dart'; // Mengimpor app_pages.dart
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -13,24 +11,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Future.delayed(Duration(seconds: 4)),
-      builder: (context, snapshot) {
-        // Menunggu future selesai
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return SplashScreen();     
-        } else {
-           return GetMaterialApp(
-          title: 'Tabungin',
-          theme: ThemeData(
-            primarySwatch: Colors.amber,
-          ),
-          initialRoute: Routes.WELCOME_PAGE,
-          getPages: AppPages.routes,
-          debugShowCheckedModeBanner: false,
-         );
-        }
-      },
+    return GetMaterialApp(
+      title: 'Tabungin',
+      theme: ThemeData(
+        primarySwatch: Colors.amber,
+      ),
+      initialRoute: Routes.SPLASH_SCREEN,
+      getPages: AppPages.routes,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
