@@ -1,4 +1,7 @@
 include: package:flutter_lints/flutter.yaml
+
 linter:
   rules:
-    
+    # Tambahkan aturan linting tambahan di bawah ini jika diperlukan
+    - avoid_print
+    - prefer_const_constructors
