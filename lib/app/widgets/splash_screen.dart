@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'dart:math' as math; // Untuk perhitungan radius lingkaran
-import '../routes/app_pages.dart'; // Akses ke route SPLASH_SCREEN
+import 'package:get/get.dart';
+import '../routes/app_pages.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,29 +14,44 @@ class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
+  late Animation<double> _fadeAnimation;
+  bool _animationInitialized = false;
 
   @override
   void initState() {
     super.initState();
 
-    // Inisialisasi AnimationController
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 1), // Durasi animasi
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final screenSize = MediaQuery.of(context).size;
 
-    // Animasi tween untuk radius lingkaran
-    _animation = Tween<double>(
-      begin: 0,
-      end: math.sqrt(math.pow(Get.width, 2) + math.pow(Get.height, 2)),
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+      // Inisialisasi AnimationController
+      _controller = AnimationController(
+        vsync: this,
+        duration: const Duration(seconds: 1),
+      );
 
-    // Mulai animasi
-    _controller.forward();
+      // Inisialisasi animasi radius lingkaran
+      _animation = Tween<double>( 
+        begin: 0,
+        end: math.sqrt(math.pow(screenSize.width, 2) + math.pow(screenSize.height, 2)),
+      ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
 
-    // Navigasi ke halaman berikutnya setelah animasi selesai
-    Future.delayed(const Duration(seconds: 3), () {
-      Get.offNamed(Routes.WELCOME_PAGE);
+      // Inisialisasi animasi fade (opacity)
+      _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(
+        CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+      );
+
+      // Mulai animasi
+      _controller.forward();
+
+      // Navigasi ke halaman berikutnya setelah animasi selesai
+      Future.delayed(const Duration(seconds: 5), () {
+        Get.offNamed(Routes.WELCOME_PAGE);
+      });
+
+      setState(() {
+        _animationInitialized = true;
+      });
     });
   }
 
@@ -51,27 +66,36 @@ class _SplashScreenState extends State<SplashScreen>
     return Stack(
       children: [
         // Background kuning awal
-        Container(color: const Color(0xFFFFC300)),
+        Container(color: const Color.fromARGB(255, 255, 255, 255)),
 
-        // Animasikan lingkaran yang membesar
-        AnimatedBuilder(
-          animation: _animation,
-          builder: (context, child) {
-            return ClipPath(
-              clipper: CircleClipper(radius: _animation.value),
-              child: Container(color: Colors.white),
-            );
-          },
-        ),
-
-        // Konten splash screen
-        Center(
-          child: SizedBox(
-            width: Get.width * 0.5,
-            height: Get.width * 0.5,
-            child: Image.asset("assets/image/splash_screen/tabungin.png"),
+        // Render animasi lingkaran dan fade hanya jika sudah diinisialisasi
+        if (_animationInitialized)
+          AnimatedBuilder(
+            animation: Listenable.merge([_animation, _fadeAnimation]),
+            builder: (context, child) {
+              return Stack(
+                children: [
+                  ClipPath(
+                    clipper: CircleClipper(radius: _animation.value),
+                    child: Container(color: Colors.white),
+                  ),
+                  Opacity(
+                    opacity: _fadeAnimation.value,
+                    child: Center(
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        height: MediaQuery.of(context).size.width * 0.5,
+                        child: Image.asset(
+                          "assets/image/splash_screen/tabungin.png",
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
-        ),
       ],
     );
   }
@@ -87,14 +111,14 @@ class CircleClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     Path path = Path();
     path.addOval(Rect.fromCircle(
-      center: Offset(size.width / 2, size.height / 2), // Titik tengah layar
-      radius: radius, // Radius lingkaran
+      center: Offset(size.width / 2, size.height / 2),
+      radius: radius,
     ));
     return path;
   }
 
   @override
   bool shouldReclip(covariant CircleClipper oldClipper) {
-    return oldClipper.radius != radius; // Reclip jika radius berubah
+    return oldClipper.radius != radius;
   }
 }
