@@ -12,13 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Tabungin',
+      title: 'Tabungin', // Nama aplikasi
       theme: ThemeData(
-        primarySwatch: Colors.amber,
+        primarySwatch: Colors.amber, // Warna utama tema
       ),
-      initialRoute: Routes.SPLASH_SCREEN,
-      getPages: AppPages.routes,
-      debugShowCheckedModeBanner: false,
+      initialRoute: Routes.SPLASH_SCREEN, // Tetap menggunakan rute SPLASH_SCREEN
+      getPages: AppPages.routes, // Daftar rute diambil dari AppPages
+      debugShowCheckedModeBanner: false, // Menyembunyikan banner debug
     );
   }
 }
