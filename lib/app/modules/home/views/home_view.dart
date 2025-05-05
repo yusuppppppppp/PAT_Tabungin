@@ -14,46 +14,19 @@ class HomeView extends StatelessWidget {
       body: Stack(
         children: [
           SingleChildScrollView(
+            padding: const EdgeInsets.only(top: 190, left: 16.0, right: 16.0), // Fixed padding issue
             child: Padding(
-              padding: const EdgeInsets.only(top: 140, left: 16.0, right: 16.0),
+              padding: const EdgeInsets.only(top: 10), // To ensure space from top
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Savings Card Section
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFBBC04),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Tabungan Anda:',
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              'Rp. 100.000.000',
-                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                          ),
-                          child: const Text('+ Top up'),
-                        ),
-                      ],
-                    ),
+                  // Savings Card Section (Replaced with custom SavingsCardSection widget)
+                  SavingsCardSection(
+                    width: MediaQuery.of(context).size.width, // Use screen width
+                    height: 150, // Custom height
                   ),
-                  const SizedBox(height: 16),
+
+                  const SizedBox(height: 20), // Give space between sections
 
                   // Illustration Section
                   Center(
@@ -64,52 +37,91 @@ class HomeView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 5),
 
-                  // Savings Options Section
+                  // Savings Options Section (Horizontal Scroll)
                   const Text(
                     'Tabungan',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 8),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      SavingsCard(title: 'Tabungan Wajib', asset: 'assets/image/home/Group71.png'),
-                      SavingsCard(title: 'Tabungan Mana Suka', asset: 'assets/image/home/Group72.png'),
-                      SavingsCard(title: 'Sumbangan', asset: 'assets/image/home/Group73.png'),
-                    ],
+                  const SingleChildScrollView(
+                    scrollDirection: Axis.horizontal, // Enable horizontal scrolling
+                    child: Row(
+                      children: [
+                        SavingsCard(
+                          title: 'Tabungan Wajib',
+                          asset: 'assets/image/home/Group71.png',
+                          imageHeight: 80, // Increase the image size here
+                        ),
+                        SizedBox(width: 8), // Add spacing between cards
+                        SavingsCard(
+                          title: 'Tabungan Mana Suka',
+                          asset: 'assets/image/home/Group72.png',
+                          imageHeight: 80, // Increase the image size here
+                        ),
+                        SizedBox(width: 8), // Add spacing between cards
+                        SavingsCard(
+                          title: 'Sumbangan',
+                          asset: 'assets/image/home/Group73.png',
+                          imageHeight: 80, // Increase the image size here
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
           ),
+
+          // Updated Top Container with improved shadow
           Container(
-            height: 120,
+            height: 150,
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4), // Shadow position
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 15,
+                  spreadRadius: 2,
+                  offset: const Offset(0, 6),
                 ),
               ],
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(16),
+                bottomRight: Radius.circular(16),
+              ),
             ),
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Hello Alvaretttt',
-                  style: TextStyle(
-                    color: Color(0xFFFFA500), // Orange color
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Hello',
+                      style: TextStyle(
+                        color: Color(0xFFFFA500),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      'Alvaretttt',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
                 CircleAvatar(
+                  radius: 30,
                   backgroundImage: AssetImage('assets/image/home/Ellipse5.png'),
                 ),
               ],
@@ -124,19 +136,19 @@ class HomeView extends StatelessWidget {
             controller.updateIndex(index);
             switch (index) {
               case 0:
-                Get.to(() => HomeView());
+                Get.offAll(() => HomeView());  // Use offAll to prevent navigation stack overflow
                 break;
               case 1:
-                Get.to(() => const GoalsView());
+                Get.offAll(() => const GoalsView());
                 break;
               case 2:
-                Get.to(() => HistoryView());
+                Get.offAll(() => ScanView());
                 break;
               case 3:
-                Get.to(() => ProfileView());
+                Get.offAll(() => HistoryView());
                 break;
               case 4:
-                Get.to(() => ScanView());
+                Get.offAll(() => ProfileView());
                 break;
             }
           },
@@ -155,18 +167,18 @@ class HomeView extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.qr_code_scanner),
-              label: 'Scan',  // Move Scan button to center
+              label: 'Scan',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.history),
-              label: 'History',  // Move History button right after Scan
+              label: 'History',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: 'Profile',  // Profile button at the far right
+              label: 'Profile',
             ),
           ],
-          type: BottomNavigationBarType.fixed, // Keeps all items aligned correctly
+          type: BottomNavigationBarType.fixed,
         );
       }),
     );
@@ -176,8 +188,14 @@ class HomeView extends StatelessWidget {
 class SavingsCard extends StatelessWidget {
   final String title;
   final String asset;
+  final double imageHeight; // Added the imageHeight parameter here
 
-  const SavingsCard({super.key, required this.title, required this.asset});
+  const SavingsCard({
+    super.key,
+    required this.title,
+    required this.asset,
+    this.imageHeight = 48, // Default height if not provided
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +208,7 @@ class SavingsCard extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Image.asset(asset, height: 48),
+            Image.asset(asset, height: imageHeight), // Use the dynamic imageHeight
             const SizedBox(height: 8),
             Text(
               title,
@@ -199,6 +217,109 @@ class SavingsCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class SavingsCardSection extends StatelessWidget {
+  final double width; // Add parameter for width
+  final double height; // Add parameter for height
+  final double imageHeight; // New parameter for adjustable image height
+
+  const SavingsCardSection({
+    super.key,
+    required this.width,
+    required this.height,
+    this.imageHeight = 200, // Default image height
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        // Transparent container in the background
+        Container(
+          width: width,
+          height: height,
+          padding: const EdgeInsets.all(20),
+          decoration: const BoxDecoration(
+            color: Colors.transparent, // Transparent background
+          ),
+        ),
+
+        // Main Container for "Tabungan Anda"
+        Container(
+          width: width,
+          height: height,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: const Color(0xFFFBBC04),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2), // Light shadow color
+                blurRadius: 8.0, // Spread and softness of the shadow
+                spreadRadius: 2.0, // How much the shadow expands
+                offset: const Offset(0, 4), // Shadow position
+              ),
+            ],
+          ),
+          child: Stack(
+            children: [
+              // Teks Tabungan Anda
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Tabungan Anda:',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Rp. 1.000.000',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+
+              // Tombol Top Up
+              Positioned(
+                bottom: 0,
+                left: 1,
+                child: ElevatedButton.icon(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  icon: Image.asset(
+                    'assets/icon/home/plus-square.png', // Replace with your icon asset path
+                    width: 24, // Adjust icon size if needed
+                    height: 24, // Adjust icon size if needed
+                  ),
+                  label: const Text(
+                    'Top up',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+
+              // Adjustable Image (Book Image or Similar)
+              Positioned(
+                left: 135,
+                top: -30,
+                child: Image.asset(
+                  'assets/image/home/Group7.png', // Replace with your image asset
+                  height: imageHeight, // Adjustable image height
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

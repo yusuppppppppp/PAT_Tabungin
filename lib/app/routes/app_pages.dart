@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/bottom_navigation/bindings/bottom_navigation_binding.dart';
+import '../modules/bottom_navigation/views/bottom_navigation_view.dart';
 import '../modules/goals/bindings/goals_binding.dart';
 import '../modules/goals/views/goals_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -63,6 +65,11 @@ class AppPages {
       name: Routes.GOALS,
       page: () => const GoalsView(),
       binding: GoalsBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOTTOM_NAVIGATION,
+      page: () => BottomNavigationView(),
+      binding: BottomNavigationBinding(),
     ),
   ];
 }

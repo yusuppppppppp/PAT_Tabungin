@@ -4,6 +4,8 @@ class GoalsController extends GetxController {
   //TODO: Implement GoalsController
 
   final count = 0.obs;
+
+  get selectedIndex => null;
   @override
   void onInit() {
     super.onInit();
@@ -20,4 +22,6 @@ class GoalsController extends GetxController {
   }
 
   void increment() => count.value++;
+
+  void updateIndex(int index) {}
 }

@@ -1,12 +1,9 @@
 import 'package:get/get.dart';
-
-import '../controllers/goals_controller.dart';
+import 'package:tabungin/app/modules/goals/controllers/goals_controller.dart';
 
 class GoalsBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<GoalsController>(
-      () => GoalsController(),
-    );
+    Get.put<GoalsController>(GoalsController());
   }
 }
