@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tabungin/app/modules/goals/views/goals_view.dart';
+import 'package:tabungin/app/modules/QR_Code/views/q_r_code_view.dart';
+import 'package:tabungin/app/modules/History/views/history_view.dart';
+import 'package:tabungin/app/modules/Profile/views/profile_view.dart';
 import 'package:tabungin/app/modules/bottom_navigation/controllers/bottom_navigation_controller.dart';
 
 class HomeView extends StatelessWidget {
@@ -17,6 +20,12 @@ class HomeView extends StatelessWidget {
             return HomePageContent(); // Custom home content
           case 1:
             return GoalsView();
+          case 2:
+            return QRCodeView();
+          case 3:
+            return HistoryView();
+          case 4:
+            return ProfileView();
           default:
             return HomePageContent();
         }
@@ -42,7 +51,7 @@ class HomeView extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.qr_code_scanner),
-              label: 'Scan',
+              label: 'QR-Code',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.history),

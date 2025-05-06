@@ -9,6 +9,9 @@ abstract class Routes {
   static const REGISTER = _Paths.REGISTER;
   static const GOALS = _Paths.GOALS;
   static const BOTTOM_NAVIGATION = _Paths.BOTTOM_NAVIGATION;
+  static const Q_R_CODE = _Paths.Q_R_CODE;
+  static const HISTORY = _Paths.HISTORY;
+  static const PROFILE = _Paths.PROFILE;
 }
 
 abstract class _Paths {
@@ -20,4 +23,7 @@ abstract class _Paths {
   static const REGISTER = '/register';
   static const GOALS = '/goals';
   static const BOTTOM_NAVIGATION = '/bottom-navigation';
+  static const Q_R_CODE = '/q-r-code';
+  static const HISTORY = '/history';
+  static const PROFILE = '/profile';
 }
