@@ -19,12 +19,6 @@ class BottomNavigationView extends StatelessWidget {
             return HomeView();
           case 1:
             return GoalsView();
-          case 2:
-            return ScanView();
-          case 3:
-            return HistoryView();
-          case 4:
-            return ProfileView();
           default:
             return HomeView();
         }

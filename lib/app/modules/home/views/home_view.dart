@@ -1,34 +1,83 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tabungin/app/modules/goals/views/goals_view.dart';
-import 'package:tabungin/app/modules/home/controllers/home_controller.dart';
+import 'package:tabungin/app/modules/bottom_navigation/controllers/bottom_navigation_controller.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({super.key});
 
-  final HomeController controller = Get.put(HomeController());
+  final BottomNavigationController controller = Get.put(BottomNavigationController());
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Obx(() {
+        switch (controller.selectedIndex.value) {
+          case 0:
+            return HomePageContent(); // Custom home content
+          case 1:
+            return GoalsView();
+          default:
+            return HomePageContent();
+        }
+      }),
+      bottomNavigationBar: Obx(() {
+        return BottomNavigationBar(
+          currentIndex: controller.selectedIndex.value,
+          onTap: (index) {
+            controller.updateIndex(index);
+          },
+          selectedItemColor: const Color(0xFFFBBC04),
+          unselectedItemColor: Colors.grey,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.flag),
+              label: 'Goals',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.qr_code_scanner),
+              label: 'Scan',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              label: 'History',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
+          ],
+          type: BottomNavigationBarType.fixed,
+        );
+      }),
+    );
+  }
+}
+
+class HomePageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
           SingleChildScrollView(
-            padding: const EdgeInsets.only(top: 190, left: 16.0, right: 16.0), // Fixed padding issue
+            padding: const EdgeInsets.only(top: 190, left: 16.0, right: 16.0),
             child: Padding(
-              padding: const EdgeInsets.only(top: 10), // To ensure space from top
+              padding: const EdgeInsets.only(top: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Savings Card Section (Replaced with custom SavingsCardSection widget)
                   SavingsCardSection(
-                    width: MediaQuery.of(context).size.width, // Use screen width
-                    height: 150, // Custom height
+                    width: MediaQuery.of(context).size.width,
+                    height: 150,
                   ),
-
-                  const SizedBox(height: 20), // Give space between sections
-
-                  // Illustration Section
+                  const SizedBox(height: 20),
                   Center(
                     child: Column(
                       children: [
@@ -38,33 +87,31 @@ class HomeView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 5),
-
-                  // Savings Options Section (Horizontal Scroll)
                   const Text(
                     'Tabungan',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 8),
                   const SingleChildScrollView(
-                    scrollDirection: Axis.horizontal, // Enable horizontal scrolling
+                    scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
                         SavingsCard(
                           title: 'Tabungan Wajib',
                           asset: 'assets/image/home/Group71.png',
-                          imageHeight: 80, // Increase the image size here
+                          imageHeight: 80,
                         ),
-                        SizedBox(width: 8), // Add spacing between cards
+                        SizedBox(width: 8),
                         SavingsCard(
                           title: 'Tabungan Mana Suka',
                           asset: 'assets/image/home/Group72.png',
-                          imageHeight: 80, // Increase the image size here
+                          imageHeight: 80,
                         ),
-                        SizedBox(width: 8), // Add spacing between cards
+                        SizedBox(width: 8),
                         SavingsCard(
                           title: 'Sumbangan',
                           asset: 'assets/image/home/Group73.png',
-                          imageHeight: 80, // Increase the image size here
+                          imageHeight: 80,
                         ),
                       ],
                     ),
@@ -73,8 +120,6 @@ class HomeView extends StatelessWidget {
               ),
             ),
           ),
-
-          // Updated Top Container with improved shadow
           Container(
             height: 150,
             width: double.infinity,
@@ -129,58 +174,6 @@ class HomeView extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: Obx(() {
-        return BottomNavigationBar(
-          currentIndex: controller.selectedIndex.value,
-          onTap: (index) {
-            controller.updateIndex(index);
-            switch (index) {
-              case 0:
-                Get.offAll(() => HomeView());  // Use offAll to prevent navigation stack overflow
-                break;
-              case 1:
-                Get.offAll(() => const GoalsView());
-                break;
-              case 2:
-                Get.offAll(() => ScanView());
-                break;
-              case 3:
-                Get.offAll(() => HistoryView());
-                break;
-              case 4:
-                Get.offAll(() => ProfileView());
-                break;
-            }
-          },
-          selectedItemColor: const Color(0xFFFBBC04),
-          unselectedItemColor: Colors.grey,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.flag),
-              label: 'Goals',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.qr_code_scanner),
-              label: 'Scan',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.history),
-              label: 'History',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
-            ),
-          ],
-          type: BottomNavigationBarType.fixed,
-        );
-      }),
     );
   }
 }
@@ -188,13 +181,13 @@ class HomeView extends StatelessWidget {
 class SavingsCard extends StatelessWidget {
   final String title;
   final String asset;
-  final double imageHeight; // Added the imageHeight parameter here
+  final double imageHeight;
 
   const SavingsCard({
     super.key,
     required this.title,
     required this.asset,
-    this.imageHeight = 48, // Default height if not provided
+    this.imageHeight = 48,
   });
 
   @override
@@ -208,7 +201,7 @@ class SavingsCard extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Image.asset(asset, height: imageHeight), // Use the dynamic imageHeight
+            Image.asset(asset, height: imageHeight),
             const SizedBox(height: 8),
             Text(
               title,
@@ -222,32 +215,29 @@ class SavingsCard extends StatelessWidget {
 }
 
 class SavingsCardSection extends StatelessWidget {
-  final double width; // Add parameter for width
-  final double height; // Add parameter for height
-  final double imageHeight; // New parameter for adjustable image height
+  final double width;
+  final double height;
+  final double imageHeight;
 
   const SavingsCardSection({
     super.key,
     required this.width,
     required this.height,
-    this.imageHeight = 200, // Default image height
+    this.imageHeight = 200,
   });
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Transparent container in the background
         Container(
           width: width,
           height: height,
           padding: const EdgeInsets.all(20),
           decoration: const BoxDecoration(
-            color: Colors.transparent, // Transparent background
+            color: Colors.transparent,
           ),
         ),
-
-        // Main Container for "Tabungan Anda"
         Container(
           width: width,
           height: height,
@@ -257,16 +247,15 @@ class SavingsCardSection extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.2), // Light shadow color
-                blurRadius: 8.0, // Spread and softness of the shadow
-                spreadRadius: 2.0, // How much the shadow expands
-                offset: const Offset(0, 4), // Shadow position
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 8.0,
+                spreadRadius: 2.0,
+                offset: const Offset(0, 4),
               ),
             ],
           ),
           child: Stack(
             children: [
-              // Teks Tabungan Anda
               const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -281,8 +270,6 @@ class SavingsCardSection extends StatelessWidget {
                   ),
                 ],
               ),
-
-              // Tombol Top Up
               Positioned(
                 bottom: 0,
                 left: 1,
@@ -296,9 +283,9 @@ class SavingsCardSection extends StatelessWidget {
                     ),
                   ),
                   icon: Image.asset(
-                    'assets/icon/home/plus-square.png', // Replace with your icon asset path
-                    width: 24, // Adjust icon size if needed
-                    height: 24, // Adjust icon size if needed
+                    'assets/icon/home/plus-square.png',
+                    width: 24,
+                    height: 24,
                   ),
                   label: const Text(
                     'Top up',
@@ -306,62 +293,18 @@ class SavingsCardSection extends StatelessWidget {
                   ),
                 ),
               ),
-
-              // Adjustable Image (Book Image or Similar)
               Positioned(
                 left: 135,
                 top: -30,
                 child: Image.asset(
-                  'assets/image/home/Group7.png', // Replace with your image asset
-                  height: imageHeight, // Adjustable image height
+                  'assets/image/home/Group7.png',
+                  height: imageHeight,
                 ),
               ),
             ],
           ),
         ),
       ],
-    );
-  }
-}
-
-class HistoryView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('History'),
-      ),
-      body: Center(
-        child: const Text('History Page'),
-      ),
-    );
-  }
-}
-
-class ProfileView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-      ),
-      body: Center(
-        child: const Text('Profile Page'),
-      ),
-    );
-  }
-}
-
-class ScanView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Scan'),
-      ),
-      body: Center(
-        child: const Text('Scan Page'),
-      ),
     );
   }
 }

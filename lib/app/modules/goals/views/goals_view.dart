@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:get/get.dart';
-
-import '../controllers/goals_controller.dart';
-
-class GoalsView extends GetView<GoalsController> {
+class GoalsView extends StatelessWidget {
   const GoalsView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,3 +19,4 @@ class GoalsView extends GetView<GoalsController> {
     );
   }
 }
+  
