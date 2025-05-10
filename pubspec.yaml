@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   get: ^4.6.6
 
+
 dev_dependencies:
   # The "flutter_launcher_icons" package helps generate app icons for your project.
   flutter_launcher_icons: ^0.14.3
