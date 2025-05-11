@@ -6,13 +6,109 @@ class GoalsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Header Section
-            Container(
+      body: Stack(
+        children: [
+          // Main content
+          Padding(
+            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 50),
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Tabungan Card
+                        SavingsCardSection(
+                          width: MediaQuery.of(context).size.width,
+                          height: 150,
+                          imageHeight: 100,
+                        ),
+                        const SizedBox(height: 30),
+                        // Goals Title
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                              child: const Text(
+                                "Goals",
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(12),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                              child: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.add, color: Color(0xFFFFC107)),
+                                padding: EdgeInsets.zero,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        // Goals List
+                        Expanded(
+                          child: ListView(
+                            children: [
+                              _buildGoalCard(
+                                context,
+                                title: "Sepedah impian",
+                                percentage: 40,
+                                asset: 'assets/image/goals/Group19.png',
+                              ),
+                              const SizedBox(height: 16),
+                              _buildGoalCard(
+                                context,
+                                title: "Laptop impian",
+                                percentage: 70,
+                                asset: 'assets/image/goals/Vector.png',
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Fixed header
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Container(
               width: double.infinity,
-              height: 80,
+              height: MediaQuery.of(context).padding.top + 44,
+              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -28,93 +124,8 @@ class GoalsView extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 25), 
-
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Tabungan Card
-                    SavingsCardSection(
-                      width: MediaQuery.of(context).size.width,
-                      height: 150,
-                      imageHeight: 100,
-                    ),
-                    const SizedBox(height: 35),
-                    // Goals Title
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 8,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                          child: const Text(
-                            "Goals",
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(12),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                blurRadius: 8,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.add, color: Color(0xFFFFC107)),
-                            padding: EdgeInsets.zero,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    // Goals List
-                    Expanded(
-                      child: ListView(
-                        children: [
-                          _buildGoalCard(
-                            context,
-                            title: "Sepedah impian",
-                            percentage: 40,
-                            asset: 'assets/image/goals/Group19.png',
-                          ),
-                          const SizedBox(height: 16),
-                          _buildGoalCard(
-                            context,
-                            title: "Laptop impian",
-                            percentage: 70,
-                            asset: 'assets/image/goals/Vector.png',
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
