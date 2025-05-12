@@ -265,7 +265,7 @@ class SavingsCardSection extends StatelessWidget {
                 ),
               ),
               Positioned(
-                left: 135,
+                left: 125,
                 top: -30,
                 child: Image.asset(
                   'assets/image/home/Group7.png',

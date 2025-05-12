@@ -9,7 +9,8 @@ import 'package:tabungin/app/modules/bottom_navigation/controllers/bottom_naviga
 class HomeView extends StatelessWidget {
   HomeView({super.key});
 
-  final BottomNavigationController controller = Get.put(BottomNavigationController());
+  final BottomNavigationController controller =
+      Get.put(BottomNavigationController());
 
   @override
   Widget build(BuildContext context) {
@@ -30,41 +31,109 @@ class HomeView extends StatelessWidget {
             return HomePageContent();
         }
       }),
-      bottomNavigationBar: Obx(() {
-        return BottomNavigationBar(
-          currentIndex: controller.selectedIndex.value,
-          onTap: (index) {
-            controller.updateIndex(index);
-          },
-          selectedItemColor: const Color(0xFFFBBC04),
-          unselectedItemColor: Colors.grey,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.flag),
-              label: 'Goals',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.qr_code_scanner),
-              label: 'QR-Code',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.history),
-              label: 'History',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          controller.updateIndex(2); // Pindah ke tab QR-Code
+        },
+        backgroundColor: const Color(0xFFFBBC04),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+              30), // Adjust this value for a more circular effect
+        ),
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.qr_code_scanner, color: Colors.white, size: 25),
+            SizedBox(height: 2),
+            Text(
+              "Scan",
+              style: TextStyle(color: Colors.white, fontSize: 10),
             ),
           ],
-          type: BottomNavigationBarType.fixed,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: Obx(() {
+        return BottomAppBar(
+          shape: const CircularNotchedRectangle(),
+          child: Padding(
+            padding: const EdgeInsets.only(
+                top: 3, bottom: 0), // Memberikan padding bawah lebih besar
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildBottomNavItem(
+                  icon: Icons.home,
+                  label: 'Home',
+                  index: 0,
+                  controller: controller,
+                ),
+                _buildBottomNavItem(
+                  icon: Icons.flag,
+                  label: 'Goals',
+                  index: 1,
+                  controller: controller,
+                ),
+                const SizedBox(width: 40), // Placeholder untuk FAB
+                _buildBottomNavItem(
+                  icon: Icons.history,
+                  label: 'History',
+                  index: 3,
+                  controller: controller,
+                ),
+                _buildBottomNavItem(
+                  icon: Icons.person,
+                  label: 'Profile',
+                  index: 4,
+                  controller: controller,
+                ),
+              ],
+            ),
+          ),
         );
       }),
+    );
+  }
+
+  Widget _buildBottomNavItem({
+    required IconData icon,
+    required String label,
+    required int index,
+    required BottomNavigationController controller,
+  }) {
+    bool isSelected = controller.selectedIndex.value == index;
+    return GestureDetector(
+      onTap: () => controller.updateIndex(index),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? const Color(0xFFFBBC04).withOpacity(0.2)
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              color: isSelected ? const Color(0xFFFBBC04) : Colors.grey,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: TextStyle(
+                color: isSelected ? const Color(0xFFFBBC04) : Colors.grey,
+                fontSize: 12,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -90,7 +159,8 @@ class HomePageContent extends StatelessWidget {
                   Center(
                     child: Column(
                       children: [
-                        Image.asset('assets/image/home/Group12.png', height: 300),
+                        Image.asset('assets/image/home/Group12.png',
+                            height: 300),
                         const SizedBox(height: 10),
                       ],
                     ),
@@ -125,10 +195,12 @@ class HomePageContent extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 50), // Adding spacing after the cards
                 ],
               ),
             ),
           ),
+          
           Container(
             height: 150,
             width: double.infinity,
@@ -286,7 +358,8 @@ class SavingsCardSection extends StatelessWidget {
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -303,11 +376,11 @@ class SavingsCardSection extends StatelessWidget {
                 ),
               ),
               Positioned(
-                left: 135,
-                top: -30,
+                left: 80, // Posisi gambar anjing di kanan
+                bottom: -90, // Mengatur gambar supaya tidak terlalu mepet
                 child: Image.asset(
                   'assets/image/home/Group7.png',
-                  height: imageHeight,
+                  height:280, // Menyesuaikan tinggi gambar
                 ),
               ),
             ],
