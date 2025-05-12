@@ -35,7 +35,7 @@ class HomeView extends StatelessWidget {
         onPressed: () {
           controller.updateIndex(2); // Pindah ke tab QR-Code
         },
-        backgroundColor: const Color(0xFFFBBC04),
+        backgroundColor: const Color(0xFF252D66),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
               30), // Adjust this value for a more circular effect
@@ -43,12 +43,8 @@ class HomeView extends StatelessWidget {
         child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.qr_code_scanner, color: Colors.white, size: 25),
+            Icon(Icons.qr_code_scanner, color: Color(0xFFFDB623), size: 30),
             SizedBox(height: 2),
-            Text(
-              "Scan",
-              style: TextStyle(color: Colors.white, fontSize: 10),
-            ),
           ],
         ),
       ),
