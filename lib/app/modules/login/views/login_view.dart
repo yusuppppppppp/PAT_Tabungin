@@ -97,7 +97,7 @@ class LoginView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.6,
+              height: MediaQuery.of(context).size.height * 0.5,
               decoration: BoxDecoration(
                 color: Color(0xFFFFC300),
                 borderRadius: BorderRadius.only(
@@ -124,34 +124,40 @@ class LoginView extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: 20),
+
             Container(
               padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SizedBox(height: 16.0),
+                  SizedBox(height: 1.0),
                   Text(
                     "Email",
                     style: TextStyle(
-                      fontSize: 16.0,
+                      fontSize: 15.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.blue,
                     ),
                   ),
                   SizedBox(height: 8.0),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "Enter your Email here",
-                      hintStyle: TextStyle(color: Colors.grey),
-                      filled: true,
-                      fillColor: Color(0xFFFFE082),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: BorderSide(color: Colors.black),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: BorderSide(color: Colors.black),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.7, // Reduced width to 70% of screen
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: "Enter your Email here",
+                        hintStyle: TextStyle(color: Colors.grey, fontSize: 11.0), // Smaller hint text
+                        filled: true,
+                        fillColor: Color(0xFFFFF9C4),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0), // Smaller padding
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                          borderSide: BorderSide(color: const Color(0xFFFFC107)),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                          borderSide: BorderSide(color: const Color(0xFFFFC107)),
+                        ),
                       ),
                     ),
                   ),
@@ -159,30 +165,34 @@ class LoginView extends StatelessWidget {
                   Text(
                     "Password",
                     style: TextStyle(
-                      fontSize: 16.0,
+                      fontSize: 15.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.blue,
                     ),
                   ),
                   SizedBox(height: 8.0),
-                  TextFormField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: "Enter your Password here",
-                      hintStyle: TextStyle(color: Colors.grey),
-                      filled: true,
-                      fillColor: Color(0xFFFFE082),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: BorderSide(color: Colors.black),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: BorderSide(color: Colors.black),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.7, // Reduced width to 70% of screen
+                    child: TextFormField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: "Enter your Password here",
+                        hintStyle: TextStyle(color: Colors.grey, fontSize: 11.0), // Smaller hint text
+                        filled: true,
+                        fillColor: Color(0xFFFFF9C4),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0), // Smaller padding
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                          borderSide: BorderSide(color: const Color(0xFFFFC107)),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                          borderSide: BorderSide(color: const Color(0xFFFFC107)),
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 10.0),
+                  SizedBox(height: 30.0),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(

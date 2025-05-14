@@ -8,6 +8,7 @@ class HistoryView extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
+          
           // Main content
           Padding(
             padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 60), // Adjusted to give space for the fixed header

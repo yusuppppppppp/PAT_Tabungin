@@ -151,34 +151,136 @@ class HomePageContent extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     height: 150,
                   ),
-                  const SizedBox(height: 20),
-                  Center(
-                    child: Column(
-                      children: [
-                        Image.asset('assets/image/home/Group12.png',
-                            height: 300),
-                        const SizedBox(height: 10),
-                      ],
-                    ),
+                  const SizedBox(height: 50),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: const Text(
+                          "Goals",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.timeline,
+                              color: Color(0xFFFFC107)),
+                          padding: EdgeInsets.zero,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 30),
+
+                  Column(
+                    children: [
+                      _buildGoalCard(
+                        context,
+                        title: "Sepedah impian",
+                        percentage: 40,
+                        asset: 'assets/image/goals/Group19.png',
+                      ),
+                      const SizedBox(height: 16),
+                      _buildGoalCard(
+                        context,
+                        title: "Laptop impian",
+                        percentage: 70,
+                        asset: 'assets/image/goals/Vector.png',
+                      ),
+                      const SizedBox(height: 50),
+                    ],
                   ),
                   const SizedBox(height: 5),
-                  const Text(
-                    'Tabungan',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: const Text(
+                          "Tabungan",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.wallet,
+                              color: Color(0xFFFFC107)),
+                          padding: EdgeInsets.zero,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 30),
+
                   const SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
                         SavingsCard(
-                          title: 'Tabungan Wajib',
+                          title: 'Wajib',
                           asset: 'assets/image/home/Group71.png',
                           imageHeight: 80,
                         ),
                         SizedBox(width: 8),
                         SavingsCard(
-                          title: 'Tabungan Mana Suka',
+                          title: 'Manasuka',
                           asset: 'assets/image/home/Group72.png',
                           imageHeight: 80,
                         ),
@@ -196,7 +298,6 @@ class HomePageContent extends StatelessWidget {
               ),
             ),
           ),
-          
           Container(
             height: 150,
             width: double.infinity,
@@ -240,6 +341,15 @@ class HomePageContent extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    SizedBox(height: 4),
+                    Text(
+                      'Nabung Yuk!',
+                      style: TextStyle(
+                        color: Color.fromRGBO(0, 0, 0, 0.518),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ],
                 ),
                 CircleAvatar(
@@ -250,6 +360,91 @@ class HomePageContent extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildGoalCard(
+    BuildContext context, {
+    required String title,
+    required int percentage,
+    required String asset,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 8,
+            spreadRadius: 1,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Row(
+          children: [
+            Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                color: const Color(0xFFFBBC04),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Image.asset(
+                  asset,
+                  width: 30,
+                  height: 30,
+                ),
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: LinearProgressIndicator(
+                            value: percentage / 100,
+                            backgroundColor: Colors.grey[200],
+                            valueColor: const AlwaysStoppedAnimation<Color>(
+                              Color(0xFFFBBC04),
+                            ),
+                            minHeight: 5,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        '$percentage%',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFFBBC04),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -272,10 +467,10 @@ class SavingsCard extends StatelessWidget {
     return Card(
       color: const Color(0xFFFBBC04),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             Image.asset(asset, height: imageHeight),
@@ -376,7 +571,7 @@ class SavingsCardSection extends StatelessWidget {
                 bottom: -90, // Mengatur gambar supaya tidak terlalu mepet
                 child: Image.asset(
                   'assets/image/home/Group7.png',
-                  height:280, // Menyesuaikan tinggi gambar
+                  height: 280, // Menyesuaikan tinggi gambar
                 ),
               ),
             ],

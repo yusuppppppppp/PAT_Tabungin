@@ -10,7 +10,8 @@ class GoalsView extends StatelessWidget {
         children: [
           // Main content
           Padding(
-            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 50),
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).padding.top + 50),
             child: Column(
               children: [
                 const SizedBox(height: 20),
@@ -32,7 +33,8 @@ class GoalsView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 40, vertical: 8),
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(20),
@@ -46,7 +48,8 @@ class GoalsView extends StatelessWidget {
                               ),
                               child: const Text(
                                 "Goals",
-                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
                               ),
                             ),
                             const SizedBox(width: 8),
@@ -66,7 +69,8 @@ class GoalsView extends StatelessWidget {
                               ),
                               child: IconButton(
                                 onPressed: () {},
-                                icon: const Icon(Icons.add, color: Color(0xFFFFC107)),
+                                icon: const Icon(Icons.add,
+                                    color: Color(0xFFFFC107)),
                                 padding: EdgeInsets.zero,
                               ),
                             ),
@@ -80,6 +84,7 @@ class GoalsView extends StatelessWidget {
                               _buildGoalCard(
                                 context,
                                 title: "Sepedah impian",
+                                text: "Rp. 2.000.000/5.000.000",
                                 percentage: 40,
                                 asset: 'assets/image/goals/Group19.png',
                               ),
@@ -87,6 +92,7 @@ class GoalsView extends StatelessWidget {
                               _buildGoalCard(
                                 context,
                                 title: "Laptop impian",
+                                text: "Rp. 7.000.000/10.000.000",
                                 percentage: 70,
                                 asset: 'assets/image/goals/Vector.png',
                               ),
@@ -130,56 +136,96 @@ class GoalsView extends StatelessWidget {
     );
   }
 
-  Widget _buildGoalCard(BuildContext context, {required String title, required int percentage, required String asset}) {
+  Widget _buildGoalCard(
+    BuildContext context, {
+    required String title,
+    required String text,
+    required int percentage,
+    required String asset,
+  }) {
     return Container(
-      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withOpacity(0.1),
             blurRadius: 8,
-            offset: const Offset(0, 4),
+            spreadRadius: 1,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: const Color(0xFFFBBC04),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Image.asset(
-              asset,
-              width: 24,
-              height: 24,
-              fit: BoxFit.contain,
-            ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Row(
+          children: [
+            Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                color: const Color(0xFFFBBC04),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Image.asset(
+                  asset,
+                  width: 30,
+                  height: 30,
                 ),
-                const SizedBox(height: 8),
-                LinearProgressIndicator(
-                  value: percentage / 100,
-                  backgroundColor: Colors.grey[300],
-                  color: const Color(0xFFFBBC04),
-                ),
-              ],
+              ),
             ),
-          ),
-          const SizedBox(width: 16),
-          const Icon(Icons.info_outline, color: Colors.black),
-        ],
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    text,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 11,
+                      color: Color.fromARGB(255, 116, 116, 116),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: LinearProgressIndicator(
+                            value: percentage / 100,
+                            backgroundColor: Colors.grey[200],
+                            valueColor: const AlwaysStoppedAnimation<Color>(
+                              Color(0xFFFBBC04),
+                            ),
+                            minHeight: 5,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        '$percentage%',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFFBBC04),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -248,7 +294,8 @@ class SavingsCardSection extends StatelessWidget {
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),

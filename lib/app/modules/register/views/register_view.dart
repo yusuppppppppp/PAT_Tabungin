@@ -15,12 +15,12 @@ class RegisterView extends StatelessWidget {
           children: [
             // Bagian atas dengan gambar menggunakan Stack dan Positioned
             SizedBox(
-              height: 350.0, // Atur tinggi dengan nilai tetap
+              height: 370.0, // Mengurangi tinggi dari 350 ke 300
               child: Stack(
                 children: [
                   // Latar belakang
                   Container(
-                    height: 350.0, // Atur tinggi agar sesuai dengan SizedBox
+                    height: 370.0, // Mengurangi tinggi agar sesuai dengan SizedBox
                     decoration: const BoxDecoration(
                       color: Color(0xFFFFC300), // Warna kuning
                       borderRadius: BorderRadius.only(
@@ -38,7 +38,7 @@ class RegisterView extends StatelessWidget {
                   ),
                   // Gambar di atas latar belakang
                   Positioned(
-                    top: 70,
+                    top: 50, // Mengurangi jarak dari atas
                     left: 70,
                     right: 0,
                     child: Center(
@@ -46,7 +46,7 @@ class RegisterView extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: Image.asset(
                           'assets/image/register/Group 4.png', // Path gambar
-                          height: 250, // Ukuran gambar
+                          height: 300, // Mengurangi ukuran gambar dari 250 ke 220
                         ),
                       ),
                     ),
@@ -54,9 +54,11 @@ class RegisterView extends StatelessWidget {
                 ],
               ),
             ),
-            // Form registrasi
+            const SizedBox(height: 20),
+
+            // Form registrasi - dibuat lebih kecil
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10.0), // Mengurangi padding vertical
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -64,84 +66,93 @@ class RegisterView extends StatelessWidget {
                   const Text(
                     "Username",
                     style: TextStyle(
-                      fontSize: 16.0,
+                      fontSize: 15.0, // Ukuran font lebih kecil
                       fontWeight: FontWeight.bold,
                       color: Colors.blue,
                     ),
                   ),
-                  const SizedBox(height: 8.0),
+                  const SizedBox(height: 4.0), // Jarak lebih kecil
                   TextFormField(
                     decoration: InputDecoration(
                       hintText: "Enter your Username here",
-                      hintStyle: const TextStyle(color: Colors.grey),
+                      hintStyle: const TextStyle(color: Colors.grey, fontSize: 11.0), // Font hint lebih kecil
                       filled: true,
                       fillColor: const Color(0xFFFFF9C4),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0), // Padding dalam input lebih kecil
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
+                        borderRadius: BorderRadius.circular(10.0), // Border radius lebih kecil
                         borderSide: const BorderSide(color: Colors.amber),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
+                        borderRadius: BorderRadius.circular(10.0),
                         borderSide: const BorderSide(color: Colors.amber),
                       ),
                     ),
+                    style: const TextStyle(fontSize: 13.0), // Ukuran teks input lebih kecil
                   ),
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: 10.0), // Jarak antar field lebih kecil
+                  
                   // Input Email
                   const Text(
                     "Email",
                     style: TextStyle(
-                      fontSize: 16.0,
+                      fontSize: 15.0, // Ukuran font lebih kecil
                       fontWeight: FontWeight.bold,
                       color: Colors.blue,
                     ),
                   ),
-                  const SizedBox(height: 8.0),
+                  const SizedBox(height: 4.0), // Jarak lebih kecil
                   TextFormField(
                     decoration: InputDecoration(
                       hintText: "Enter your Email here",
-                      hintStyle: const TextStyle(color: Colors.grey),
+                      hintStyle: const TextStyle(color: Colors.grey, fontSize: 11.0), // Font hint lebih kecil
                       filled: true,
                       fillColor: const Color(0xFFFFF9C4),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0), // Padding dalam input lebih kecil
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
+                        borderRadius: BorderRadius.circular(10.0), // Border radius lebih kecil
                         borderSide: const BorderSide(color: Colors.amber),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
+                        borderRadius: BorderRadius.circular(10.0),
                         borderSide: const BorderSide(color: Colors.amber),
                       ),
                     ),
+                    style: const TextStyle(fontSize: 13.0), // Ukuran teks input lebih kecil
                   ),
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: 10.0), // Jarak antar field lebih kecil
+                  
                   // Input Password
                   const Text(
                     "Password",
                     style: TextStyle(
-                      fontSize: 16.0,
+                      fontSize: 15.0, // Ukuran font lebih kecil
                       fontWeight: FontWeight.bold,
                       color: Colors.blue,
                     ),
                   ),
-                  const SizedBox(height: 8.0),
+                  const SizedBox(height: 4.0), // Jarak lebih kecil
                   TextFormField(
                     obscureText: true,
                     decoration: InputDecoration(
                       hintText: "Enter your Password here",
-                      hintStyle: const TextStyle(color: Colors.grey),
+                      hintStyle: const TextStyle(color: Colors.grey, fontSize: 11.0), // Font hint lebih kecil
                       filled: true,
                       fillColor: const Color(0xFFFFF9C4),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0), // Padding dalam input lebih kecil
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: const BorderSide(color: Colors.amber),
+                        borderRadius: BorderRadius.circular(10.0), // Border radius lebih kecil
+                        borderSide: const BorderSide(color: Color(0xFFFFC107)),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: const BorderSide(color: Colors.amber),
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(color: Color(0xFFFFC107)),
                       ),
                     ),
+                    style: const TextStyle(fontSize: 13.0), // Ukuran teks input lebih kecil
                   ),
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 30.0),
+                  
                   // Tombol REGISTER
                   ElevatedButton(
                     onPressed: () {
@@ -153,28 +164,29 @@ class RegisterView extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF252D70),
-                      padding: const EdgeInsets.symmetric(vertical: 12.0),
+                      padding: const EdgeInsets.symmetric(vertical: 10.0), // Tinggi tombol lebih kecil
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
+                        borderRadius: BorderRadius.circular(25.0),
                       ),
                     ),
                     child: const Text(
                       'REGISTER',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16.0,
+                        fontSize: 14.0, // Font pada tombol lebih kecil
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: 12.0), // Jarak lebih kecil
+                  
                   // Teks untuk login
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
                         "Sudah punya akun ? ",
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: Colors.black, fontSize: 12.0), // Font lebih kecil
                       ),
                       GestureDetector(
                         onTap: () {
@@ -189,6 +201,7 @@ class RegisterView extends StatelessWidget {
                           style: TextStyle(
                             color: Color(0xFFFFC300),
                             fontWeight: FontWeight.bold,
+                            fontSize: 12.0, // Font lebih kecil
                           ),
                         ),
                       ),
