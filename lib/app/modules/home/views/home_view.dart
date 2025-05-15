@@ -37,13 +37,18 @@ class HomeView extends StatelessWidget {
         },
         backgroundColor: const Color(0xFF252D66),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-              30), // Adjust this value for a more circular effect
+          borderRadius: BorderRadius.circular(30),
         ),
         child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.qr_code_scanner, color: Color(0xFFFDB623), size: 30),
+            // Replaced with custom QR code asset
+            Image(
+              image: AssetImage('assets/icon/navbar/scan.png'),
+              color: Color(0xFFFDB623),
+              width: 30,
+              height: 30,
+            ),
             SizedBox(height: 2),
           ],
         ),
@@ -53,32 +58,31 @@ class HomeView extends StatelessWidget {
         return BottomAppBar(
           shape: const CircularNotchedRectangle(),
           child: Padding(
-            padding: const EdgeInsets.only(
-                top: 3, bottom: 0), // Memberikan padding bawah lebih besar
+            padding: const EdgeInsets.only(top: 3, bottom: 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _buildBottomNavItem(
-                  icon: Icons.home,
+                  assetPath: 'assets/icon/navbar/home.png',
                   label: 'Home',
                   index: 0,
                   controller: controller,
                 ),
                 _buildBottomNavItem(
-                  icon: Icons.flag,
+                  assetPath: 'assets/icon/navbar/goals.png',
                   label: 'Goals',
                   index: 1,
                   controller: controller,
                 ),
                 const SizedBox(width: 40), // Placeholder untuk FAB
                 _buildBottomNavItem(
-                  icon: Icons.history,
+                  assetPath: 'assets/icon/navbar/history.png',
                   label: 'History',
                   index: 3,
                   controller: controller,
                 ),
                 _buildBottomNavItem(
-                  icon: Icons.person,
+                  assetPath: 'assets/icon/navbar/profil.png',
                   label: 'Profile',
                   index: 4,
                   controller: controller,
@@ -92,7 +96,7 @@ class HomeView extends StatelessWidget {
   }
 
   Widget _buildBottomNavItem({
-    required IconData icon,
+    required String assetPath,
     required String label,
     required int index,
     required BottomNavigationController controller,
@@ -114,8 +118,10 @@ class HomeView extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
+            Image(
+              image: AssetImage(assetPath),
+              width: 24,
+              height: 24,
               color: isSelected ? const Color(0xFFFBBC04) : Colors.grey,
             ),
             const SizedBox(height: 4),
@@ -134,6 +140,7 @@ class HomeView extends StatelessWidget {
   }
 }
 
+// Rest of the code remains the same...
 class HomePageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -199,7 +206,7 @@ class HomePageContent extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 40),
 
                   Column(
                     children: [

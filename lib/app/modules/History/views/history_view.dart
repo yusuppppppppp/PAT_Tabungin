@@ -8,13 +8,61 @@ class HistoryView extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          
           // Main content
           Padding(
-            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 60), // Adjusted to give space for the fixed header
+            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 80), // Adjusted to give space for the fixed header
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               children: [
+                // Goals Row positioned at the top before transaction items
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 8,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: const Text(
+                        "History",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.2),
+                            blurRadius: 8,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.access_time,
+                            color: Color(0xFFFFC107)),
+                        padding: EdgeInsets.zero,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16), // Add some spacing after the Goals row
                 _buildTransactionItem(
                   icon: 'assets/image/history/kartu_tambah.png',
                   title: 'Top Up',
