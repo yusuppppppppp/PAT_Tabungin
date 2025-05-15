@@ -10,7 +10,9 @@ class HistoryView extends StatelessWidget {
         children: [
           // Main content
           Padding(
-            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 80), // Adjusted to give space for the fixed header
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).padding.top +
+                    80), // Adjusted to give space for the fixed header
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               children: [
@@ -55,14 +57,18 @@ class HistoryView extends StatelessWidget {
                       ),
                       child: IconButton(
                         onPressed: () {},
-                        icon: const Icon(Icons.access_time,
-                            color: Color(0xFFFFC107)),
+                        icon: Image.asset(
+                          'assets/icon/navbar/history.png', // Ganti dengan path aset Anda
+                          width: 24, // Sesuaikan ukuran gambar
+                          height: 24,
+                        ),
                         padding: EdgeInsets.zero,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 16), // Add some spacing after the Goals row
+                const SizedBox(
+                    height: 16), // Add some spacing after the Goals row
                 _buildTransactionItem(
                   icon: 'assets/image/history/kartu_tambah.png',
                   title: 'Top Up',
@@ -112,8 +118,10 @@ class HistoryView extends StatelessWidget {
                   ),
                 ],
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(16), // Add border radius on the bottom left
-                  bottomRight: Radius.circular(16), // Add border radius on the bottom right
+                  bottomLeft: Radius.circular(
+                      16), // Add border radius on the bottom left
+                  bottomRight: Radius.circular(
+                      16), // Add border radius on the bottom right
                 ),
               ),
             ),
@@ -204,7 +212,8 @@ class HistoryView extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: Colors.green.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
