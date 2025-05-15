@@ -16,17 +16,17 @@ class ProfileView extends GetView<ProfileController> {
             Stack(
               clipBehavior: Clip.none,
               children: [
-                // Wave shadow (slightly shifted down)
+                // Wave shadow
                 Positioned(
                   top: 5, // Slightly shifted down from the original wave
                   left: 0,
                   right: 0,
                   child: CustomPaint(
                     painter: WaveShadowPainter(),
-                    size: const Size(double.infinity, 285), // Slightly taller to account for shadow
+                    size: const Size(double.infinity, 285),
                   ),
                 ),
-                
+
                 // Wave background
                 ClipPath(
                   clipper: WaveClipper(),
@@ -34,7 +34,7 @@ class ProfileView extends GetView<ProfileController> {
                     width: double.infinity,
                     height: 280,
                     decoration: const BoxDecoration(
-                      color: Color(0xFFFBBC04), // Warna oranye dari kode asli
+                      color: Color(0xFFFBBC04),
                     ),
                   ),
                 ),
@@ -45,7 +45,7 @@ class ProfileView extends GetView<ProfileController> {
                   left: MediaQuery.of(context).size.width / 2 - 50,
                   child: Column(
                     children: [
-                      // Avatar dengan border yang lebih menarik
+                      // Avatar
                       Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
@@ -59,10 +59,13 @@ class ProfileView extends GetView<ProfileController> {
                             ),
                           ],
                         ),
-                        child: const CircleAvatar(
-                          radius: 50,
-                          backgroundImage:
-                              AssetImage('assets/image/profil/avatar.png'),
+                        child: GestureDetector(
+                          onTap: () => _showAvatarOptions(context),
+                          child: const CircleAvatar(
+                            radius: 50,
+                            backgroundImage:
+                                AssetImage('assets/image/profil/avatar.png'),
+                          ),
                         ),
                       ),
                       const SizedBox(height: 12),
@@ -100,7 +103,7 @@ class ProfileView extends GetView<ProfileController> {
             ),
             const SizedBox(height: 20),
 
-            // Grafik dengan tampilan yang lebih baik
+            // Grafik
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Container(
@@ -127,7 +130,7 @@ class ProfileView extends GetView<ProfileController> {
               ),
             ),
 
-            // Tombol Expenses dengan desain yang lebih menarik
+            // Tombol Expenses
             Align(
               alignment: Alignment.bottomRight,
               child: Padding(
@@ -159,10 +162,9 @@ class ProfileView extends GetView<ProfileController> {
                 ),
               ),
             ),
-
             const SizedBox(height: 50),
 
-            // Section header
+            // Section Header
             Padding(
               padding: const EdgeInsets.only(left: 24, right: 24, bottom: 10),
               child: Row(
@@ -205,8 +207,7 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                     child: IconButton(
                       onPressed: () {},
-                      icon:
-                          const Icon(Icons.edit, color: Color(0xFFFFC107)),
+                      icon: const Icon(Icons.edit, color: Color(0xFFFFC107)),
                       padding: EdgeInsets.zero,
                     ),
                   ),
@@ -276,8 +277,48 @@ class ProfileView extends GetView<ProfileController> {
                 ],
               ),
             ),
-
             const SizedBox(height: 60),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showAvatarOptions(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 5,
+              width: 40,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              margin: const EdgeInsets.only(bottom: 12),
+            ),
+            ListTile(
+              leading: const Icon(Icons.photo_library, color: Color.fromARGB(255, 0, 0, 0)),
+              title: const Text('Pilih dari Galeri'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.camera_alt, color: Color(0xFFFBBC04)),
+              title: const Text('Ambil Foto'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.cancel, color: Colors.red),
+              title: const Text('Batal'),
+              onTap: () => Navigator.pop(context),
+            ),
           ],
         ),
       ),
@@ -315,44 +356,36 @@ class ProfileView extends GetView<ProfileController> {
         children: [
           // Icon container
           Container(
-            padding: EdgeInsets.all(isCompact ? 6 : 8),
+            padding: const EdgeInsets.all(6),
             decoration: BoxDecoration(
-              color: textColor.withOpacity(0.15),
+              color: Colors.white.withOpacity(0.2),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(
-              icon,
-              color: textColor,
-              size: isCompact ? 16 : 20,
-            ),
+            child: Icon(icon, color: textColor, size: 20),
           ),
+          const SizedBox(width: 12),
 
-          SizedBox(width: isCompact ? 8 : 12),
-
-          // Text content
+          // Label and Value
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Label
                 Text(
                   label,
                   style: TextStyle(
-                    color: textColor.withOpacity(0.7),
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
+                    fontSize: isCompact ? 12 : 14,
+                    color: textColor.withOpacity(0.8),
                   ),
                 ),
-                const SizedBox(height: 2),
-                // Value - with auto overflow ellipsis
+                const SizedBox(height: 4),
                 Text(
                   value,
                   style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: isCompact ? 14 : 16,
                     color: textColor,
-                    fontSize: isCompact ? 12 : 14,
-                    fontWeight: FontWeight.bold,
                   ),
-                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
@@ -363,45 +396,42 @@ class ProfileView extends GetView<ProfileController> {
   }
 }
 
-// Custom Clipper for Wave Background
+// Wave Clipper
 class WaveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    final path = Path();
+    Path path = Path();
     path.lineTo(0, size.height - 50);
     path.quadraticBezierTo(
-        size.width / 4, size.height, size.width / 2, size.height - 50);
+        size.width * 0.25, size.height, size.width * 0.5, size.height - 50);
     path.quadraticBezierTo(
-        3 * size.width / 4, size.height - 100, size.width, size.height - 50);
+        size.width * 0.75, size.height - 100, size.width, size.height - 50);
     path.lineTo(size.width, 0);
     path.close();
     return path;
   }
 
   @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
 
-// Custom Painter for Wave Shadow
+// Wave Shadow Painter
 class WaveShadowPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    // Create the same path as the wave clipper
+    final paint = Paint()
+      ..color = const Color(0x66FFCC00)
+      ..style = PaintingStyle.fill;
+
     final path = Path();
     path.lineTo(0, size.height - 50);
     path.quadraticBezierTo(
-        size.width / 4, size.height, size.width / 2, size.height - 50);
+        size.width * 0.25, size.height, size.width * 0.5, size.height - 50);
     path.quadraticBezierTo(
-        3 * size.width / 4, size.height - 100, size.width, size.height - 50);
+        size.width * 0.75, size.height - 100, size.width, size.height - 50);
     path.lineTo(size.width, 0);
     path.close();
-    
-    // Create a shadow-like effect with paint
-    final paint = Paint()
-      ..color = Colors.black.withOpacity(0.15)
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 8);
-    
-    // Draw the shadow under the path
+
     canvas.drawPath(path, paint);
   }
 
