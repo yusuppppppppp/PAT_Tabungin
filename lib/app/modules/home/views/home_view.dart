@@ -144,6 +144,10 @@ class HomeView extends StatelessWidget {
 class HomePageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Get access to the BottomNavigationController
+    final BottomNavigationController navController =
+        Get.find<BottomNavigationController>();
+
     return Scaffold(
       body: Stack(
         children: [
@@ -302,10 +306,10 @@ class HomePageContent extends StatelessWidget {
                 bottomRight: Radius.circular(16),
               ),
             ),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
+                const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -337,9 +341,17 @@ class HomePageContent extends StatelessWidget {
                     ),
                   ],
                 ),
-                CircleAvatar(
-                  radius: 30,
-                  backgroundImage: AssetImage('assets/image/home/Ellipse5.png'),
+                // Made the CircleAvatar clickable and navigate to Profile
+                GestureDetector(
+                  onTap: () {
+                    // Navigate to Profile tab (index 4)
+                    navController.updateIndex(4);
+                  },
+                  child: const CircleAvatar(
+                    radius: 30,
+                    backgroundImage:
+                        AssetImage('assets/image/home/Ellipse5.png'),
+                  ),
                 ),
               ],
             ),
