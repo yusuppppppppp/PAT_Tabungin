@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:tabungin/app/modules/goals/views/goals_view.dart';
 import 'package:tabungin/app/modules/QR_Code/views/q_r_code_view.dart';
 import 'package:tabungin/app/modules/History/views/history_view.dart';
@@ -140,8 +141,172 @@ class HomeView extends StatelessWidget {
   }
 }
 
+// Class SavingsBottomSheet untuk handle bottom sheet
+class SavingsBottomSheet {
+  static void showBottomSheet({
+    required BuildContext context,
+    required String title,
+    required Color buttonColor,
+  }) {
+    final TextEditingController amountController = TextEditingController();
+    DateTime selectedDate = DateTime.now();
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return StatefulBuilder(builder: (context, setState) {
+          return AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+            ),
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  const Text(
+                    'Nominal',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  TextField(
+                    controller: amountController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      prefixIcon: const Padding(
+                        padding: EdgeInsets.only(left: 12.0, right: 4.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Rp.',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      hintText: 'Masukkan nominal',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Tanggal',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  InkWell(
+                    onTap: () async {
+                      final DateTime? picked = await showDatePicker(
+                        context: context,
+                        initialDate: selectedDate,
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2100),
+                      );
+                      if (picked != null && picked != selectedDate) {
+                        setState(() {
+                          selectedDate = picked;
+                        });
+                      }
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 15),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade400),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.calendar_today, size: 20),
+                          const SizedBox(width: 8),
+                          Text(
+                            DateFormat('dd MMMM yyyy').format(selectedDate),
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey.shade700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (amountController.text.isNotEmpty) {
+                          Navigator.pop(context); // Menutup BottomSheet
+                          BottomNavigationController controller = Get.find();
+                          controller
+                              .updateIndex(2); // Beralih ke halaman QRCodeView
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: buttonColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: const Text(
+                        'Selanjutnya',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+      },
+    );
+  }
+}
+
 // Rest of the code remains the same...
 class HomePageContent extends StatelessWidget {
+  const HomePageContent({super.key});
+
   @override
   Widget build(BuildContext context) {
     // Get access to the BottomNavigationController
@@ -258,7 +423,8 @@ class HomePageContent extends StatelessWidget {
                   ),
                   const SizedBox(height: 30),
 
-                  const SingleChildScrollView(
+                  // Modified SavingsCard section with onTap functionality
+                  SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
@@ -266,18 +432,40 @@ class HomePageContent extends StatelessWidget {
                           title: 'Wajib',
                           asset: 'assets/image/home/Group71.png',
                           imageHeight: 80,
+                          onTap: () {
+                            SavingsBottomSheet.showBottomSheet(
+                              context: context,
+                              title: 'Wajib',
+                              buttonColor: const Color(0xFFFF9800), // Green
+                            );
+                          },
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         SavingsCard(
                           title: 'Manasuka',
                           asset: 'assets/image/home/Group72.png',
                           imageHeight: 80,
+                          onTap: () {
+                            SavingsBottomSheet.showBottomSheet(
+                              context: context,
+                              title: 'Manasuka',
+                              buttonColor: const Color.fromARGB(
+                                  255, 0, 102, 255), // Orange
+                            );
+                          },
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         SavingsCard(
                           title: 'Sumbangan',
                           asset: 'assets/image/home/Group73.png',
                           imageHeight: 80,
+                          onTap: () {
+                            SavingsBottomSheet.showBottomSheet(
+                              context: context,
+                              title: 'Sumbangan',
+                              buttonColor: const Color(0xFF252D66), // Blue
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -451,32 +639,37 @@ class SavingsCard extends StatelessWidget {
   final String title;
   final String asset;
   final double imageHeight;
+  final VoidCallback? onTap; // Added onTap callback
 
   const SavingsCard({
     super.key,
     required this.title,
     required this.asset,
     this.imageHeight = 48,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: const Color(0xFFFBBC04),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Image.asset(asset, height: imageHeight),
-            const SizedBox(height: 8),
-            Text(
-              title,
-              style: const TextStyle(fontWeight: FontWeight.w600),
-            ),
-          ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        color: const Color(0xFFFBBC04),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Image.asset(asset, height: imageHeight),
+              const SizedBox(height: 8),
+              Text(
+                title,
+                style: const TextStyle(fontWeight: FontWeight.w600),
+              ),
+            ],
+          ),
         ),
       ),
     );

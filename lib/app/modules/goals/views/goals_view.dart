@@ -72,7 +72,7 @@ class _GoalsViewState extends State<GoalsView> {
                               ),
                               child: IconButton(
                                 onPressed: () {
-                                  _showAddGoalPopup(context);
+                                  _showAddGoalBottomSheet(context);
                                 },
                                 icon: const Icon(Icons.add,
                                     color: Color(0xFFFFC107)),
@@ -140,23 +140,26 @@ class _GoalsViewState extends State<GoalsView> {
     );
   }
 
-  void _showAddGoalPopup(BuildContext context) {
+  void _showAddGoalBottomSheet(BuildContext context) {
     final _titleController = TextEditingController();
     final _nominalController = TextEditingController();
 
-    showDialog(
+    showModalBottomSheet(
       context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
       builder: (context) {
-        return Dialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
-          elevation: 10,
-          backgroundColor: Colors.white,
-          insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
           child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(28),
-              gradient: const LinearGradient(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+              gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [Colors.white, Color(0xFFFFFAEE)],
@@ -168,7 +171,7 @@ class _GoalsViewState extends State<GoalsView> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Header simplificado
+                    // Header
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -202,7 +205,7 @@ class _GoalsViewState extends State<GoalsView> {
                     ),
                     const SizedBox(height: 20),
 
-                    // Image Selector - Enhanced with visual flair
+                    // Image Selector
                     Center(
                       child: GestureDetector(
                         onTap: () {
@@ -233,7 +236,6 @@ class _GoalsViewState extends State<GoalsView> {
                           child: Stack(
                             alignment: Alignment.center,
                             children: [
-                              // Camera icon
                               Container(
                                 padding: const EdgeInsets.all(14),
                                 decoration: BoxDecoration(
@@ -247,8 +249,6 @@ class _GoalsViewState extends State<GoalsView> {
                                   size: 28,
                                 ),
                               ),
-
-                              // Label at bottom
                               const Positioned(
                                 bottom: 12,
                                 child: Text(
@@ -267,7 +267,7 @@ class _GoalsViewState extends State<GoalsView> {
                     ),
                     const SizedBox(height: 24),
 
-                    // Form fields with icon - Enhanced visual styling
+                    // Form fields
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -314,7 +314,7 @@ class _GoalsViewState extends State<GoalsView> {
                     ),
                     const SizedBox(height: 16),
 
-                    // Nominal input - Enhanced
+                    // Nominal input
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -362,7 +362,7 @@ class _GoalsViewState extends State<GoalsView> {
                     ),
                     const SizedBox(height: 30),
 
-                    // Add Button - Enhanced without decoration circles
+                    // Add Button
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -467,7 +467,7 @@ class _GoalsViewState extends State<GoalsView> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 3),
                   Text(
                     text,
                     style: const TextStyle(
@@ -498,6 +498,94 @@ class _GoalsViewState extends State<GoalsView> {
                           fontWeight: FontWeight.bold,
                           color: Color(0xFFFBBC04),
                         ),
+                      ),
+                      IconButton(
+                        padding: EdgeInsets.zero, // Hilangkan padding tambahan
+                        constraints:
+                            const BoxConstraints(), // Sesuaikan ukuran tombol
+                        icon: const Icon(
+                          Icons.add_circle,
+                          color: Color(0xFFFBBC04),
+                        ),
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled:
+                                true, // Ensure the bottom sheet adjusts for the keyboard
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(16),
+                              ),
+                            ),
+                            builder: (BuildContext context) {
+                              final TextEditingController _controller =
+                                  TextEditingController();
+                              return Padding(
+                                padding: EdgeInsets.only(
+                                  left: 16.0,
+                                  right: 16.0,
+                                  top: 16.0,
+                                  bottom: MediaQuery.of(context)
+                                      .viewInsets
+                                      .bottom, // Adjust padding for keyboard
+                                ),
+                                child: SingleChildScrollView(
+                                  // Allows content to scroll if needed
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        "Masukkan Nominal",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      TextField(
+                                        controller: _controller,
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          labelText: "Nominal",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.of(context).pop(),
+                                            child: const Text("Batal"),
+                                          ),
+                                          const SizedBox(width: 8),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              final String inputNominal =
+                                                  _controller.text;
+                                              if (inputNominal.isNotEmpty) {
+                                                print("Nominal: $inputNominal");
+                                              }
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text("Simpan"),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
                       ),
                     ],
                   ),

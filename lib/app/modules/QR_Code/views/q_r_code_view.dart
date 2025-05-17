@@ -62,11 +62,6 @@ class _QRCodeViewState extends State<QRCodeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('QR Code Scanner'),
-        centerTitle: true,
-        backgroundColor: Colors.black,
-      ),
       body: Column(
         children: [
           Expanded(
