@@ -15,7 +15,7 @@ class LoginView extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Column(
+              child: const Column(
                 children: [
                   Icon(Icons.account_circle, size: 40.0, color: Colors.amber),
                   SizedBox(height: 8.0),
@@ -74,8 +74,8 @@ class LoginView extends StatelessWidget {
           ],
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: Text(
               "To continue, Google will share your name, email address, language preference, and profile picture with Company.",
               style: TextStyle(fontSize: 12.0, color: Colors.black54),
@@ -98,7 +98,7 @@ class LoginView extends StatelessWidget {
           children: [
             Container(
               height: MediaQuery.of(context).size.height * 0.5,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0xFFFFC300),
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(100.0),
@@ -132,7 +132,7 @@ class LoginView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   SizedBox(height: 1.0),
-                  Text(
+                  const Text(
                     "Email",
                     style: TextStyle(
                       fontSize: 15.0,
@@ -162,7 +162,7 @@ class LoginView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 16.0),
-                  Text(
+                  const Text(
                     "Password",
                     style: TextStyle(
                       fontSize: 15.0,
@@ -192,7 +192,7 @@ class LoginView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 30.0),
+                  const SizedBox(height: 30.0),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
@@ -207,7 +207,7 @@ class LoginView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30.0),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'LOGIN',
                       style: TextStyle(
                         color: Colors.white,
@@ -222,7 +222,7 @@ class LoginView extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           "Sign in with Google",
                           style: TextStyle(
                             color: Colors.black,

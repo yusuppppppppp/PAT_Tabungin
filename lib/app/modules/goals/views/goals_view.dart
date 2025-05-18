@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 
 class GoalsView extends StatefulWidget {
   const GoalsView({super.key});
@@ -659,11 +661,12 @@ class SavingsCardSection extends StatelessWidget {
                 bottom: 0,
                 left: 1,
                 child: ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    _showWithdrawBottomSheet(context);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -691,6 +694,245 @@ class SavingsCardSection extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  void _showWithdrawBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (BuildContext context) {
+        return WithdrawFormBottomSheet();
+      },
+    );
+  }
+}
+
+class WithdrawFormBottomSheet extends StatefulWidget {
+  const WithdrawFormBottomSheet({Key? key}) : super(key: key);
+
+  @override
+  _WithdrawFormBottomSheetState createState() => _WithdrawFormBottomSheetState();
+}
+
+class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
+  final TextEditingController _amountController = TextEditingController();
+  DateTime _selectedDate = DateTime.now();
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    // Start with "0" so the prefix is visible immediately
+    _amountController.text = "0";
+  }
+
+  // Format currency to Rupiah
+  String _formatCurrency(String value) {
+    if (value.isEmpty) return '0';
+    
+    // Remove non-digit characters
+    String digits = value.replaceAll(RegExp(r'[^\d]'), '');
+    
+    // Format with thousand separators
+    final formatter = NumberFormat("#,###", "id_ID");
+    if (digits.isNotEmpty) {
+      return formatter.format(int.parse(digits));
+    }
+    return '0';
+  }
+
+  @override
+  void dispose() {
+    _amountController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+      });
+    }
+  }
+
+  void _navigateToNextPage() {
+    Navigator.pop(context); // Close current bottom sheet
+    
+    // Navigate to the next page (replace with your actual navigation)
+    Navigator.pushNamed(context, '/q-r-code');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+        left: 16,
+        right: 16,
+        top: 20,
+      ),
+      child: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Withdraw Tabungan',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 24),
+              const Text(
+                'Nominal Withdraw',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  children: [
+                    // Prefix container that's always visible
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade100,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(9),
+                          bottomLeft: Radius.circular(9),
+                        ),
+                        border: Border(
+                          right: BorderSide(color: Colors.grey),
+                        ),
+                      ),
+                      child: Text(
+                        'Rp',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    // Text field without border
+                    Expanded(
+                      child: TextFormField(
+                        controller: _amountController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                          border: InputBorder.none,
+                          hintText: '0',
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty || value == '0') {
+                            return 'Masukkan nominal withdraw';
+                          }
+                          final amount = int.tryParse(value.replaceAll(RegExp(r'[^\d]'), ''));
+                          if (amount == null || amount <= 0) {
+                            return 'Nominal harus lebih dari 0';
+                          }
+                          return null;
+                        },
+                        onChanged: (value) {
+                          // Use the _formatCurrency method to format the input
+                          String formattedValue = _formatCurrency(value);
+                          _amountController.value = TextEditingValue(
+                            text: formattedValue,
+                            selection: TextSelection.collapsed(offset: formattedValue.length),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Tanggal Transaksi',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 8),
+              GestureDetector(
+                onTap: () => _selectDate(context),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        DateFormat('dd MMMM yyyy').format(_selectedDate),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const Icon(Icons.calendar_today),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 32),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _navigateToNextPage();
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: const Text(
+                    'Selanjutnya',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

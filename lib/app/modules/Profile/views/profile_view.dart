@@ -316,6 +316,11 @@ class ProfileView extends GetView<ProfileController> {
               onTap: () {},
             ),
             ListTile(
+              leading: const Icon(Icons.logout, color: Color(0xFF252D66)),
+              title: const Text('Logout'),
+              onTap: () => Navigator.pushNamed(context, '/login-register'),
+            ),
+            ListTile(
               leading: const Icon(Icons.cancel, color: Colors.red),
               title: const Text('Batal'),
               onTap: () => Navigator.pop(context),
