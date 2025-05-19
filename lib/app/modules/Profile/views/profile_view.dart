@@ -5,6 +5,64 @@ import '../controllers/profile_controller.dart';
 class ProfileView extends GetView<ProfileController> {
   const ProfileView({super.key});
 
+// Fungsi Helper: Untuk membangun item summary
+  Widget _buildSummaryItem({
+    required String title,
+    required double amount,
+    required Color iconBackgroundColor,
+    required IconData iconData,
+  }) {
+    return Row(
+      children: [
+        Container(
+          width: 36,
+          height: 36,
+          decoration: BoxDecoration(
+            color: iconBackgroundColor,
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            iconData,
+            color: Colors.white,
+            size: 18,
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                'Rp${_formatCurrency(amount)}',
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+// Fungsi Helper: Untuk memformat angka menjadi format mata uang
+  String _formatCurrency(double amount) {
+    return amount.toStringAsFixed(0).replaceAllMapped(
+          RegExp(r'(\d)(?=(\d{3})+(?!\d))'),
+          (Match match) => '${match[1]}.',
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,7 +161,6 @@ class ProfileView extends GetView<ProfileController> {
             ),
             const SizedBox(height: 20),
 
-            // Grafik
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Container(
@@ -118,47 +175,61 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                   ],
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: Image.asset(
-                    'assets/image/profil/grafik1.png',
-                    height: 210,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
-
-            // Tombol Expenses
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 20, top: 12),
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.asset(
+                        'assets/image/profil/grafik1.png',
+                        height: 210,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 12),
-                    elevation: 4,
-                  ),
-                  icon: const Icon(
-                    Icons.compare_arrows,
-                    color: Color(0xFFFFC107),
-                    size: 20,
-                  ),
-                  label: const Text(
-                    'Expenses',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                    const SizedBox(height: 16),
+                    // Summary Section
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 10,
+                            spreadRadius: 1,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: _buildSummaryItem(
+                              title: 'Uang Masuk',
+                              amount: 300000, 
+                              iconBackgroundColor: Colors.green,
+                              iconData: Icons.arrow_downward,
+                            ),
+                          ),
+                          Container(
+                            height: 40,
+                            width: 1,
+                            color: Colors.grey.withOpacity(0.2),
+                          ),
+                          Expanded(
+                            child: _buildSummaryItem(
+                              title: 'Uang Keluar',
+                              amount: 540000, 
+                              iconBackgroundColor: Colors.orange,
+                              iconData: Icons.arrow_upward,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             ),
@@ -579,7 +650,7 @@ class ProfileView extends GetView<ProfileController> {
               prefixIcon: Icon(icon, color: iconColor),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.symmetric(vertical: 14),
-              hintStyle: TextStyle(color: Colors.grey[400]),
+              hintStyle: TextStyle(color: const Color(0xFFBDBDBD)),
             ),
           ),
         ),

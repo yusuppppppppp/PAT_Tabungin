@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
 class GoalsView extends StatefulWidget {
   const GoalsView({super.key});
 
@@ -143,8 +142,8 @@ class _GoalsViewState extends State<GoalsView> {
   }
 
   void _showAddGoalBottomSheet(BuildContext context) {
-    final _titleController = TextEditingController();
-    final _nominalController = TextEditingController();
+    final _goalController = TextEditingController();
+    final _priceController = TextEditingController();
 
     showModalBottomSheet(
       context: context,
@@ -152,7 +151,7 @@ class _GoalsViewState extends State<GoalsView> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
       ),
       isScrollControlled: true,
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       builder: (context) {
         return Padding(
           padding: EdgeInsets.only(
@@ -161,255 +160,217 @@ class _GoalsViewState extends State<GoalsView> {
           child: Container(
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Colors.white, Color(0xFFFFFAEE)],
-              ),
+              color:
+                  Color.fromARGB(255, 255, 255, 255), // Yellow background color
             ),
             child: Padding(
               padding: const EdgeInsets.all(24),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // Header
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Goal Baru',
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.black87,
-                            letterSpacing: 0.3,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          icon: Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.close,
-                              color: Colors.black54,
-                              size: 18,
-                            ),
-                          ),
-                          constraints: const BoxConstraints(),
-                          padding: EdgeInsets.zero,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Progress Card
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 10,
+                          spreadRadius: 0,
+                          offset: const Offset(0, 4),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
-
-                    // Image Selector
-                    Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Pilih gambar goal')),
-                          );
-                        },
-                        child: Container(
-                          width: 120,
-                          height: 120,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(24),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color:
-                                    const Color(0xFFFBBC04).withOpacity(0.15),
-                                blurRadius: 15,
-                                spreadRadius: 2,
-                                offset: const Offset(0, 5),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Row(
+                        children: [
+                          // Yellow square with upload icon
+                          Container(
+                            width: 60,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFFFC107),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.upload,
+                                color: Colors.black,
+                                size: 24,
                               ),
-                            ],
-                            border: Border.all(
-                              color: const Color(0xFFFBBC04).withOpacity(0.2),
-                              width: 2,
                             ),
                           ),
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(14),
-                                decoration: BoxDecoration(
-                                  color:
-                                      const Color(0xFFFBBC04).withOpacity(0.15),
-                                  shape: BoxShape.circle,
+                          const SizedBox(width: 16),
+                          // Progress details
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Dotted line
+                                const Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        "........................................",
+                                        maxLines: 1,
+                                        overflow: TextOverflow.clip,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                child: const Icon(
-                                  Icons.photo_camera,
-                                  color: Color(0xFFFBBC04),
-                                  size: 28,
-                                ),
-                              ),
-                              const Positioned(
-                                bottom: 12,
-                                child: Text(
-                                  "Tambah Foto",
+                                const SizedBox(height: 6),
+                                // Percentage
+                                const Text(
+                                  "0%",
                                   style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xFFFBBC04),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-
-                    // Form fields
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.04),
-                            blurRadius: 8,
-                            spreadRadius: 1,
-                            offset: const Offset(0, 3),
+                                const SizedBox(height: 6),
+                                // Progress bar
+                                Container(
+                                  height: 8,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.shade300,
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 0, // 0% progress
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFFFFC107),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.drive_file_rename_outline,
-                              color: Color(0xFFFBBC04),
-                              size: 20,
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: TextField(
-                                controller: _titleController,
-                                decoration: const InputDecoration(
-                                  hintText: 'Nama Goal Kamu',
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                  ),
-                                  border: InputBorder.none,
-                                  isDense: true,
-                                  contentPadding:
-                                      EdgeInsets.symmetric(vertical: 14),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                     ),
-                    const SizedBox(height: 16),
+                  ),
+                  const SizedBox(height: 24),
 
-                    // Nominal input
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.04),
-                            blurRadius: 8,
-                            spreadRadius: 1,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.monetization_on_outlined,
-                              color: Color(0xFFFBBC04),
-                              size: 20,
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: TextField(
-                                controller: _nominalController,
-                                keyboardType: TextInputType.number,
-                                decoration: const InputDecoration(
-                                  hintText: 'Rp 5.000.000',
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                  ),
-                                  border: InputBorder.none,
-                                  isDense: true,
-                                  contentPadding:
-                                      EdgeInsets.symmetric(vertical: 14),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                  // Goal Input Label
+                  const Text(
+                    "Masukkan Goals",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: Colors.black87,
                     ),
-                    const SizedBox(height: 30),
+                  ),
+                  const SizedBox(height: 8),
 
-                    // Add Button
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFFFBBC04), Color(0xFFFFAA00)],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
+                  // Goal Input Field
+                  Container(
+                    height: 50, // Smaller height
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                          color: const Color(0xFFBDBDBD),
+                          width: 1), // Add black border
+                    ),
+                    child: TextField(
+                      controller: _goalController,
+                      decoration: const InputDecoration(
+                        hintText: 'Masukkan Goals',
+                        hintStyle: TextStyle(fontSize: 12),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          borderSide: BorderSide.none,
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xFFFBBC04).withOpacity(0.25),
-                            blurRadius: 12,
-                            spreadRadius: 0,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
+                        filled: true,
+                        fillColor: Color(0x52D4D4D4),
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 12), // Reduced vertical padding
                       ),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          elevation: 0,
-                          shadowColor: Colors.transparent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Price Input Label
+                  const Text(
+                    "Masukkan Harga Barang",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+
+                  // Price Input Field
+                  Container(
+                    height: 50, // Smaller height
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                          color: const Color(0xFFBDBDBD),
+                          width: 1), // Add black border
+                    ),
+                    child: TextField(
+                      controller: _priceController,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        hintStyle: TextStyle(fontSize: 12),
+                        hintText: 'Masukkan Harga Barang',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          borderSide: BorderSide.none,
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          // Logic untuk menambahkan goal
-                        },
-                        child: const Text(
-                          'Tambah Goal',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16,
-                            letterSpacing: 0.3,
-                          ),
+                        filled: true,
+                        fillColor: Color(0x52D4D4D4),
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 12), // Reduced vertical padding
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // Save Button
+                  SizedBox(
+                    width: 400,
+                    height: 45,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        // Logic untuk menyimpan data
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFFFC107),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Text(
+                        'Simpan',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -557,30 +518,86 @@ class _GoalsViewState extends State<GoalsView> {
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(height: 16),
+                                      const SizedBox(height: 40),
+                                      // Tombol Simpan dan Batal
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
                                         children: [
-                                          TextButton(
-                                            onPressed: () =>
-                                                Navigator.of(context).pop(),
-                                            child: const Text("Batal"),
+                                          // Tombol Batal
+                                          Expanded(
+                                            flex: 1,
+                                            child: ElevatedButton(
+                                              onPressed: () =>
+                                                  Navigator.pop(context),
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor:
+                                                    const Color.fromARGB(
+                                                        255, 255, 0, 0),
+                                                foregroundColor:
+                                                    const Color.fromARGB(
+                                                        255, 255, 255, 255),
+                                                elevation: 0,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 12),
+                                              ),
+                                              child: const Text(
+                                                'Batal',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
                                           ),
-                                          const SizedBox(width: 8),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              final String inputNominal =
-                                                  _controller.text;
-                                              if (inputNominal.isNotEmpty) {
-                                                print("Nominal: $inputNominal");
-                                              }
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: const Text("Simpan"),
+                                          const SizedBox(width: 12),
+
+                                          // Tombol Simpan
+                                          Expanded(
+                                            flex: 2,
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                // Implementasi logika simpan informasi
+                                                Navigator.pop(context);
+                                                // Tambahkan logika untuk memperbarui informasi di sini
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.black,
+                                                foregroundColor: Colors.white,
+                                                elevation: 2,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 12),
+                                              ),
+                                              child: const Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.check_circle,
+                                                    color: Color(0xFFFFC107),
+                                                    size: 20,
+                                                  ),
+                                                  SizedBox(width: 8),
+                                                  Text(
+                                                    'Simpan Perubahan',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                           ),
                                         ],
                                       ),
+                                      const SizedBox(height: 35),
                                     ],
                                   ),
                                 ),
@@ -666,7 +683,8 @@ class SavingsCardSection extends StatelessWidget {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -715,7 +733,8 @@ class WithdrawFormBottomSheet extends StatefulWidget {
   const WithdrawFormBottomSheet({Key? key}) : super(key: key);
 
   @override
-  _WithdrawFormBottomSheetState createState() => _WithdrawFormBottomSheetState();
+  _WithdrawFormBottomSheetState createState() =>
+      _WithdrawFormBottomSheetState();
 }
 
 class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
@@ -733,10 +752,10 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
   // Format currency to Rupiah
   String _formatCurrency(String value) {
     if (value.isEmpty) return '0';
-    
+
     // Remove non-digit characters
     String digits = value.replaceAll(RegExp(r'[^\d]'), '');
-    
+
     // Format with thousand separators
     final formatter = NumberFormat("#,###", "id_ID");
     if (digits.isNotEmpty) {
@@ -767,7 +786,7 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
 
   void _navigateToNextPage() {
     Navigator.pop(context); // Close current bottom sheet
-    
+
     // Navigate to the next page (replace with your actual navigation)
     Navigator.pushNamed(context, '/q-r-code');
   }
@@ -824,7 +843,8 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
                   children: [
                     // Prefix container that's always visible
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 15),
                       decoration: BoxDecoration(
                         color: Colors.grey.shade100,
                         borderRadius: BorderRadius.only(
@@ -837,7 +857,8 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
                       ),
                       child: Text(
                         'Rp',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w500),
                       ),
                     ),
                     // Text field without border
@@ -846,7 +867,8 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
                         controller: _amountController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 15),
                           border: InputBorder.none,
                           hintText: '0',
                         ),
@@ -854,7 +876,8 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
                           if (value == null || value.isEmpty || value == '0') {
                             return 'Masukkan nominal withdraw';
                           }
-                          final amount = int.tryParse(value.replaceAll(RegExp(r'[^\d]'), ''));
+                          final amount = int.tryParse(
+                              value.replaceAll(RegExp(r'[^\d]'), ''));
                           if (amount == null || amount <= 0) {
                             return 'Nominal harus lebih dari 0';
                           }
@@ -865,7 +888,8 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
                           String formattedValue = _formatCurrency(value);
                           _amountController.value = TextEditingValue(
                             text: formattedValue,
-                            selection: TextSelection.collapsed(offset: formattedValue.length),
+                            selection: TextSelection.collapsed(
+                                offset: formattedValue.length),
                           );
                         },
                       ),
@@ -885,7 +909,8 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
               GestureDetector(
                 onTap: () => _selectDate(context),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(10),
