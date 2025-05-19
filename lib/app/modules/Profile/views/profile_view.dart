@@ -177,16 +177,6 @@ class ProfileView extends GetView<ProfileController> {
                 ),
                 child: Column(
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Image.asset(
-                        'assets/image/profil/grafik1.png',
-                        height: 210,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
                     // Summary Section
                     Container(
                       padding: const EdgeInsets.symmetric(
@@ -213,11 +203,13 @@ class ProfileView extends GetView<ProfileController> {
                               iconData: Icons.arrow_downward,
                             ),
                           ),
+                          const SizedBox(width: 18),
                           Container(
                             height: 40,
                             width: 1,
                             color: Colors.grey.withOpacity(0.2),
                           ),
+                          const SizedBox(width: 23),
                           Expanded(
                             child: _buildSummaryItem(
                               title: 'Uang Keluar',

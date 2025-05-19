@@ -791,8 +791,14 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
     Navigator.pushNamed(context, '/q-r-code');
   }
 
-  @override
+   @override
   Widget build(BuildContext context) {
+    // Warna tema kekuningan
+    final Color primaryYellow = Color(0xFFFFCC00);
+    final Color secondaryYellow = Color(0xFFFFF5D6);
+    final Color darkYellow = Color(0xFFD4A400);
+    final Color textColor = Color(0xFF5C4D00);
+
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -809,124 +815,187 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
             children: [
               Center(
                 child: Container(
-                  width: 40,
-                  height: 5,
+                  width: 50,
+                  height: 6,
                   decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: primaryYellow,
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-              const Text(
-                'Withdraw Tabungan',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 24),
-              const Text(
-                'Nominal Withdraw',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 8),
+
+              const SizedBox(height: 40),
               Container(
+                padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(10),
+                  color: secondaryYellow,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: primaryYellow.withOpacity(0.2),
+                      blurRadius: 10,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
                 ),
-                child: Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Prefix container that's always visible
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 15),
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(9),
-                          bottomLeft: Radius.circular(9),
-                        ),
-                        border: Border(
-                          right: BorderSide(color: Colors.grey),
-                        ),
-                      ),
-                      child: Text(
-                        'Rp',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                    Text(
+                      'Nominal Withdraw',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: textColor,
                       ),
                     ),
-                    // Text field without border
-                    Expanded(
-                      child: TextFormField(
-                        controller: _amountController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 15),
-                          border: InputBorder.none,
-                          hintText: '0',
+                    const SizedBox(height: 12),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: primaryYellow, width: 1.5),
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: primaryYellow.withOpacity(0.1),
+                            blurRadius: 5,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          // Fixed Prefix container with correct height and styling
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            height: 54, // Match the height of TextFormField
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: primaryYellow,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10.5),
+                                bottomLeft: Radius.circular(10.5),
+                              ),
+                            ),
+                            child: Text(
+                              'Rp',
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600,
+                                color: textColor,
+                              ),
+                            ),
+                          ),
+                          // Text field tanpa border
+                          Expanded(
+                            child: TextFormField(
+                              controller: _amountController,
+                              keyboardType: TextInputType.number,
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w500,
+                                color: textColor,
+                              ),
+                              decoration: const InputDecoration(
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 14, vertical: 10),
+                                border: InputBorder.none,
+                                hintText: '0 Masukkan nominal withdraw',
+                                hintStyle: TextStyle(color: Colors.grey),
+                                errorStyle: TextStyle(
+                                    height: 0), // Hide error text inside field
+                              ),
+
+                              // logic gwa matikan
+                              // validator: (value) {
+                              //   if (value == null || value.isEmpty) {
+                              //     return 'Masukkan nominal top up';
+                              //   }
+                              //   final amount = int.tryParse(
+                              //       value.replaceAll(RegExp(r'[^\d]'), ''));
+                              //   if (amount == null || amount <= 0) {
+                              //     return 'Nominal harus lebih dari 0';
+                              //   }
+                              //   return null;
+                              // },
+                              // done
+
+                              onChanged: (value) {
+                                // Remove initial "0" when user starts typing
+                                if (value.startsWith('0') && value.length > 1) {
+                                  String newValue = value.substring(1);
+                                  String formattedValue =
+                                      _formatCurrency(newValue);
+                                  _amountController.value = TextEditingValue(
+                                    text: formattedValue,
+                                    selection: TextSelection.collapsed(
+                                        offset: formattedValue.length),
+                                  );
+                                } else {
+                                  // Normal formatting for other cases
+                                  String formattedValue =
+                                      _formatCurrency(value);
+                                  _amountController.value = TextEditingValue(
+                                    text: formattedValue,
+                                    selection: TextSelection.collapsed(
+                                        offset: formattedValue.length),
+                                  );
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      'Tanggal Transaksi',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: textColor,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    GestureDetector(
+                      onTap: () => _selectDate(context),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 14, vertical: 16),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: primaryYellow),
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color: primaryYellow.withOpacity(0.1),
+                              blurRadius: 5,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty || value == '0') {
-                            return 'Masukkan nominal withdraw';
-                          }
-                          final amount = int.tryParse(
-                              value.replaceAll(RegExp(r'[^\d]'), ''));
-                          if (amount == null || amount <= 0) {
-                            return 'Nominal harus lebih dari 0';
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {
-                          // Use the _formatCurrency method to format the input
-                          String formattedValue = _formatCurrency(value);
-                          _amountController.value = TextEditingValue(
-                            text: formattedValue,
-                            selection: TextSelection.collapsed(
-                                offset: formattedValue.length),
-                          );
-                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              DateFormat('dd MMMM yyyy').format(_selectedDate),
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: textColor,
+                              ),
+                            ),
+                            Icon(
+                              Icons.calendar_today,
+                              color: darkYellow,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
-              const Text(
-                'Tanggal Transaksi',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 8),
-              GestureDetector(
-                onTap: () => _selectDate(context),
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        DateFormat('dd MMMM yyyy').format(_selectedDate),
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      const Icon(Icons.calendar_today),
-                    ],
-                  ),
-                ),
-              ),
+              
               const SizedBox(height: 32),
               SizedBox(
                 width: double.infinity,
@@ -937,7 +1006,7 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
+                    backgroundColor: const Color(0xFFFFCC00),
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -946,7 +1015,7 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
                   child: const Text(
                     'Selanjutnya',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Color(0xFF5C4D00),
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
