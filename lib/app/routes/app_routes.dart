@@ -12,6 +12,8 @@ abstract class Routes {
   static const Q_R_CODE = _Paths.Q_R_CODE;
   static const HISTORY = _Paths.HISTORY;
   static const PROFILE = _Paths.PROFILE;
+  static const LUPA_PW = _Paths.LUPA_PW;
+  static const RESET_PW = _Paths.RESET_PW;
 }
 
 abstract class _Paths {
@@ -26,4 +28,6 @@ abstract class _Paths {
   static const Q_R_CODE = '/q-r-code';
   static const HISTORY = '/history';
   static const PROFILE = '/profile';
+  static const LUPA_PW = '/lupa-pw';
+  static const RESET_PW = '/reset-pw';
 }

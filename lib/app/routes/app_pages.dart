@@ -16,8 +16,12 @@ import '../modules/login-register/bindings/login_register_binding.dart';
 import '../modules/login-register/views/login_register_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/lupa_pw/bindings/lupa_pw_binding.dart';
+import '../modules/lupa_pw/views/lupa_pw_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/reset_pw/bindings/reset_pw_binding.dart';
+import '../modules/reset_pw/views/reset_pw_view.dart';
 import '../modules/welcome_page/bindings/welcome_page_binding.dart';
 import '../modules/welcome_page/views/welcome_page_view.dart';
 
@@ -92,6 +96,16 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.LUPA_PW,
+      page: () => const LupaPwView(),
+      binding: LupaPwBinding(),
+    ),
+    GetPage(
+      name: _Paths.RESET_PW,
+      page: () => const ResetPwView(),
+      binding: ResetPwBinding(),
     ),
   ];
 }

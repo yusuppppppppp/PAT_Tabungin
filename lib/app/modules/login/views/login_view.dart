@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tabungin/app/modules/home/views/home_view.dart';
+import 'package:tabungin/app/modules/lupa_pw/views/lupa_pw_view.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -192,7 +193,27 @@ class LoginView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30.0),
+                  // Menambahkan teks Lupa Password di bagian kanan
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LupaPwView()),
+                        );
+                      },
+                      child: const Text(
+                        "Lupa Password?",
+                        style: TextStyle(
+                          fontSize: 12.0,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
