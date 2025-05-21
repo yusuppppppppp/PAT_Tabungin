@@ -80,6 +80,7 @@ flutter:
     - assets/icon/navbar/
     - assets/image/top_up/
     - assets/image/lupa_pw/
+    - assets/image/reset_pw/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

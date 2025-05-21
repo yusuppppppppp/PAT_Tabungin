@@ -147,84 +147,192 @@ class SavingsBottomSheet {
     required BuildContext context,
     required String title,
     required Color buttonColor,
+    String? subtitle,
   }) {
     final TextEditingController amountController = TextEditingController();
     DateTime selectedDate = DateTime.now();
+    
+    // Warna tema oranye yang konsisten
+    final Color primaryOrange = const Color(0xFFFFA726);
+    final Color darkOrange = const Color(0xFFE65100);
+    final Color lightOrange = const Color(0xFFFFCC80);
 
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       builder: (context) {
         return StatefulBuilder(builder: (context, setState) {
           return AnimatedContainer(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeOut,
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.white, lightOrange.withOpacity(0.2)],
               ),
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(24),
+                topRight: Radius.circular(24),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: darkOrange.withOpacity(0.2),
+                  spreadRadius: 1,
+                  blurRadius: 10,
+                  offset: const Offset(0, -2),
+                ),
+              ],
             ),
             padding: EdgeInsets.only(
               bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Handle bar di bagian atas
                   Center(
-                    child: Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  const Text(
-                    'Nominal',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  TextField(
-                    controller: amountController,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      prefixIcon: const Padding(
-                        padding: EdgeInsets.only(left: 12.0, right: 4.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              'Rp.',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      hintText: 'Masukkan nominal',
-                      border: OutlineInputBorder(
+                    child: Container(
+                      width: 40,
+                      height: 5,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
                   const SizedBox(height: 16),
-                  const Text(
+                  
+                  // Header dengan icon dekoratif
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: primaryOrange.withOpacity(0.2),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.savings_outlined,
+                          color: darkOrange,
+                          size: 24,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: darkOrange,
+                            ),
+                          ),
+                          if (subtitle != null)
+                            Text(
+                              subtitle,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey.shade600,
+                              ),
+                            ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 28),
+                  
+                  // Nominal Field
+                  Text(
+                    'Nominal',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey.shade800,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: const Offset(0, 1),
+                        ),
+                      ],
+                    ),
+                    child: TextField(
+                      controller: amountController,
+                      keyboardType: TextInputType.number,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.only(left: 16.0, right: 8.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'Rp.',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: darkOrange,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        hintText: 'Masukkan nominal',
+                        hintStyle: TextStyle(
+                          color: Colors.grey.shade400,
+                          fontSize: 15,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: lightOrange,
+                            width: 1.5,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: primaryOrange,
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                   
+                  // Tanggal Field
+                  Text(
                     'Tanggal',
                     style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey.shade800,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -235,6 +343,18 @@ class SavingsBottomSheet {
                         initialDate: selectedDate,
                         firstDate: DateTime.now(),
                         lastDate: DateTime(2100),
+                        builder: (context, child) {
+                          return Theme(
+                            data: Theme.of(context).copyWith(
+                              colorScheme: ColorScheme.light(
+                                primary: primaryOrange,
+                                onPrimary: Colors.white,
+                                onSurface: Colors.black,
+                              ),
+                            ),
+                            child: child!,
+                          );
+                        },
                       );
                       if (picked != null && picked != selectedDate) {
                         setState(() {
@@ -244,52 +364,99 @@ class SavingsBottomSheet {
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 15),
+                        horizontal: 16,
+                        vertical: 16,
+                      ),
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade400),
-                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        border: Border.all(color: lightOrange, width: 1.5),
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 3,
+                            offset: const Offset(0, 1),
+                          ),
+                        ],
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.calendar_today, size: 20),
-                          const SizedBox(width: 8),
+                          Icon(
+                            Icons.calendar_today,
+                            size: 20,
+                            color: darkOrange,
+                          ),
+                          const SizedBox(width: 12),
                           Text(
                             DateFormat('dd MMMM yyyy').format(selectedDate),
                             style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey.shade700,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.grey.shade800,
                             ),
+                          ),
+                          const Spacer(),
+                          Icon(
+                            Icons.arrow_drop_down,
+                            color: primaryOrange,
                           ),
                         ],
                       ),
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 32),
+                  
+                  // Button
                   SizedBox(
                     width: double.infinity,
-                    height: 50,
+                    height: 54,
                     child: ElevatedButton(
                       onPressed: () {
                         if (amountController.text.isNotEmpty) {
                           Navigator.pop(context); // Menutup BottomSheet
                           BottomNavigationController controller = Get.find();
-                          controller
-                              .updateIndex(2); // Beralih ke halaman QRCodeView
+                          controller.updateIndex(2); // Beralih ke halaman QRCodeView
+                        } else {
+                          // Tampilkan animasi shake pada field nominal
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: const Text('Harap masukkan nominal'),
+                              backgroundColor: darkOrange,
+                              behavior: SnackBarBehavior.floating,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          );
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: buttonColor,
+                        backgroundColor: primaryOrange,
+                        foregroundColor: Colors.white,
+                        elevation: 3,
+                        shadowColor: primaryOrange.withOpacity(0.5),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: const Text(
-                        'Selanjutnya',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Selanjutnya',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Icon(
+                            Icons.arrow_forward_rounded,
+                            color: Colors.white.withOpacity(0.9),
+                          ),
+                        ],
                       ),
                     ),
                   )
