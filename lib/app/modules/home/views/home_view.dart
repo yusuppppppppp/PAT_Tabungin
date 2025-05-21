@@ -151,11 +151,13 @@ class SavingsBottomSheet {
   }) {
     final TextEditingController amountController = TextEditingController();
     DateTime selectedDate = DateTime.now();
-    
+
     // Warna tema oranye yang konsisten
     final Color primaryOrange = const Color(0xFFFFA726);
     final Color darkOrange = const Color(0xFFE65100);
     final Color lightOrange = const Color(0xFFFFCC80);
+    final Color Hitam = const Color.fromARGB(255, 0, 0, 0);
+
 
     showModalBottomSheet(
       context: context,
@@ -167,11 +169,7 @@ class SavingsBottomSheet {
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeOut,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Colors.white, lightOrange.withOpacity(0.2)],
-              ),
+              color: Colors.white, // Hanya warna putih
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(24),
                 topRight: Radius.circular(24),
@@ -197,10 +195,10 @@ class SavingsBottomSheet {
                   // Handle bar di bagian atas
                   Center(
                     child: Container(
-                      width: 40,
+                      width: 60,
                       height: 5,
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
+                        color: const Color(0xFFFFC300),
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
@@ -211,28 +209,15 @@ class SavingsBottomSheet {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: primaryOrange.withOpacity(0.2),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          Icons.savings_outlined,
-                          color: darkOrange,
-                          size: 24,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             title,
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 24,
                               fontWeight: FontWeight.bold,
-                              color: darkOrange,
+                              color: Hitam,
                             ),
                           ),
                           if (subtitle != null)
@@ -469,6 +454,7 @@ class SavingsBottomSheet {
     );
   }
 }
+
 
 // Rest of the code remains the same...
 class HomePageContent extends StatelessWidget {
