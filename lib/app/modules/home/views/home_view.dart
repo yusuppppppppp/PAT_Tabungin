@@ -156,7 +156,8 @@ class SavingsBottomSheet {
     final Color primaryOrange = const Color(0xFFFFA726);
     final Color darkOrange = const Color(0xFFE65100);
     final Color lightOrange = const Color(0xFFFFCC80);
-    final Color Hitam = const Color.fromARGB(255, 0, 0, 0);
+    final Color Black = const Color.fromARGB(255, 0, 0, 0);
+    final Color Oranye = const Color(0xFFFDB623);
 
     showModalBottomSheet(
       context: context,
@@ -216,7 +217,7 @@ class SavingsBottomSheet {
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
-                              color: Hitam,
+                              color: Black,
                             ),
                           ),
                           if (subtitle != null)
@@ -415,7 +416,7 @@ class SavingsBottomSheet {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: primaryOrange,
+                        backgroundColor: Oranye,
                         foregroundColor: Colors.white,
                         elevation: 3,
                         shadowColor: primaryOrange.withOpacity(0.5),
@@ -595,8 +596,7 @@ class HomePageContent extends StatelessWidget {
                             SavingsBottomSheet.showBottomSheet(
                               context: context,
                               title: 'Manasuka',
-                              buttonColor: const Color.fromARGB(
-                                  255, 0, 102, 255), // Orange
+                              buttonColor: const Color(0xFFFF9800), 
                             );
                           },
                         ),
@@ -609,7 +609,7 @@ class HomePageContent extends StatelessWidget {
                             SavingsBottomSheet.showBottomSheet(
                               context: context,
                               title: 'Sumbangan',
-                              buttonColor: const Color(0xFF252D66), // Blue
+                              buttonColor: const Color(0xFFFF9800), 
                             );
                           },
                         ),
@@ -868,7 +868,7 @@ class SavingsCardSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Tabungan Anda:',
+                    'Saldo Anda :',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: 8),
@@ -1005,7 +1005,7 @@ class _TopUpFormBottomSheetState extends State<TopUpFormBottomSheet> {
   @override
   Widget build(BuildContext context) {
     // Warna tema kekuningan
-    final Color primaryYellow = Color(0xFFFFCC00);
+    final Color primaryYellow = Color(0xFFFFB300);
     final Color secondaryYellow = Color(0xFFFFF5D6);
     final Color darkYellow = Color(0xFFD4A400);
     final Color textColor = Color(0xFF5C4D00);

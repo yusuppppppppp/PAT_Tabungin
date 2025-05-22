@@ -142,8 +142,8 @@ class _GoalsViewState extends State<GoalsView> {
   }
 
   void _showAddGoalBottomSheet(BuildContext context) {
-    final _goalController = TextEditingController();
-    final _priceController = TextEditingController();
+    final goalController = TextEditingController();
+    final priceController = TextEditingController();
 
     showModalBottomSheet(
       context: context,
@@ -193,7 +193,7 @@ class _GoalsViewState extends State<GoalsView> {
                             width: 60,
                             height: 60,
                             decoration: BoxDecoration(
-                              color: const Color(0xFFFFC107),
+                              color: const Color(0xFFFFB300),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: const Center(
@@ -247,7 +247,7 @@ class _GoalsViewState extends State<GoalsView> {
                                       Container(
                                         width: 0, // 0% progress
                                         decoration: BoxDecoration(
-                                          color: const Color(0xFFFFC107),
+                                          color: const Color(0xFFFFB300),
                                           borderRadius:
                                               BorderRadius.circular(4),
                                         ),
@@ -286,7 +286,7 @@ class _GoalsViewState extends State<GoalsView> {
                           width: 1), // Add black border
                     ),
                     child: TextField(
-                      controller: _goalController,
+                      controller: goalController,
                       decoration: const InputDecoration(
                         hintText: 'Masukkan Goals',
                         hintStyle: TextStyle(fontSize: 12),
@@ -326,7 +326,7 @@ class _GoalsViewState extends State<GoalsView> {
                           width: 1), // Add black border
                     ),
                     child: TextField(
-                      controller: _priceController,
+                      controller: priceController,
                       keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
                         hintStyle: TextStyle(fontSize: 12),
@@ -355,7 +355,7 @@ class _GoalsViewState extends State<GoalsView> {
                         // Logic untuk menyimpan data
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFFFC107),
+                        backgroundColor: const Color(0xFFFFB300),
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -400,7 +400,7 @@ class _GoalsViewState extends State<GoalsView> {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.only(left: 25, right: 10, top: 10, bottom: 0),
         child: Row(
           children: [
             Container(
@@ -473,132 +473,215 @@ class _GoalsViewState extends State<GoalsView> {
                         onPressed: () {
                           showModalBottomSheet(
                             context: context,
-                            isScrollControlled:
-                                true, // Ensure the bottom sheet adjusts for the keyboard
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(16),
+                                top: Radius.circular(20),
                               ),
                             ),
                             builder: (BuildContext context) {
                               final TextEditingController _controller =
                                   TextEditingController();
-                              return Padding(
-                                padding: EdgeInsets.only(
-                                  left: 16.0,
-                                  right: 16.0,
-                                  top: 16.0,
-                                  bottom: MediaQuery.of(context)
-                                      .viewInsets
-                                      .bottom, // Adjust padding for keyboard
-                                ),
-                                child: SingleChildScrollView(
-                                  // Allows content to scroll if needed
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Text(
-                                        "Masukkan Nominal",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 16),
-                                      TextField(
-                                        controller: _controller,
-                                        keyboardType: TextInputType.number,
-                                        decoration: InputDecoration(
-                                          labelText: "Nominal",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 40),
-                                      // Tombol Simpan dan Batal
-                                      Row(
-                                        children: [
-                                          // Tombol Batal
-                                          Expanded(
-                                            flex: 1,
-                                            child: ElevatedButton(
-                                              onPressed: () =>
-                                                  Navigator.pop(context),
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor:
-                                                    const Color.fromARGB(
-                                                        255, 255, 0, 0),
-                                                foregroundColor:
-                                                    const Color.fromARGB(
-                                                        255, 255, 255, 255),
-                                                elevation: 0,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                ),
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 12),
-                                              ),
-                                              child: const Text(
-                                                'Batal',
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(width: 12),
-
-                                          // Tombol Simpan
-                                          Expanded(
-                                            flex: 2,
-                                            child: ElevatedButton(
-                                              onPressed: () {
-                                                // Implementasi logika simpan informasi
-                                                Navigator.pop(context);
-                                                // Tambahkan logika untuk memperbarui informasi di sini
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.black,
-                                                foregroundColor: Colors.white,
-                                                elevation: 2,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                ),
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 12),
-                                              ),
-                                              child: const Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(
-                                                    Icons.check_circle,
-                                                    color: Color(0xFFFFC107),
-                                                    size: 20,
-                                                  ),
-                                                  SizedBox(width: 8),
-                                                  Text(
-                                                    'Simpan Perubahan',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 35),
+                              return Container(
+                                decoration: const BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Color.fromARGB(255, 255, 255, 255), // Light yellow
+                                      Color.fromARGB(255, 255, 255, 255), // Slightly deeper yellow
                                     ],
+                                  ),
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(20),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color(0x1A000000),
+                                      blurRadius: 10,
+                                      offset: Offset(0, -2),
+                                    ),
+                                  ],
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 20.0,
+                                    right: 20.0,
+                                    top: 20.0,
+                                    bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+                                  ),
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        // Header dengan accent line
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              width: 70,
+                                              height: 5,
+                                              margin: const EdgeInsets.only(bottom: 16),
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xFFFFB300),
+                                                borderRadius: BorderRadius.circular(2),
+                                              ),
+                                            ),
+                                            const Text(
+                                              "Masukkan Nominal",
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xFF6D4C00), // Dark golden brown
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 40),
+                                        
+                                        // TextField dengan styling kuning
+                                        TextField(
+                                          controller: _controller,
+                                          keyboardType: TextInputType.number,
+                                          style: const TextStyle(
+                                            color: Color(0xFF6D4C00),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                          decoration: InputDecoration(
+                                            labelText: "Nominal",
+                                            labelStyle: const TextStyle(
+                                              color: Color(0xFF8D6E00),
+                                              fontSize: 14,
+                                            ),
+                                            filled: true,
+                                            fillColor: const Color(0xFFFFFBF0), // Very light yellow
+                                            border: OutlineInputBorder(
+                                              borderRadius: BorderRadius.circular(12),
+                                              borderSide: const BorderSide(
+                                                color: Color(0xFFFFD54F),
+                                                width: 1.5,
+                                              ),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.circular(12),
+                                              borderSide: const BorderSide(
+                                                color: Color(0xFFFFD54F),
+                                                width: 1.5,
+                                              ),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.circular(12),
+                                              borderSide: const BorderSide(
+                                                color: Color(0xFFFFB300),
+                                                width: 2,
+                                              ),
+                                            ),
+                                            contentPadding: const EdgeInsets.symmetric(
+                                              horizontal: 16,
+                                              vertical: 14,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 40),
+                                        
+                                        // Buttons dengan tema kuning
+                                        Row(
+                                          children: [
+                                            // Tombol Batal
+                                            Expanded(
+                                              flex: 1,
+                                              child: ElevatedButton(
+                                                onPressed: () => Navigator.pop(context),
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor: const Color.fromARGB(255, 255, 0, 0), // Light orange-yellow
+                                                  foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+                                                  elevation: 0,
+                                                  shadowColor: Colors.transparent,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(12),
+                                                    side: const BorderSide(
+                                                      color: Color(0xFFFFD54F),
+                                                      width: 1,
+                                                    ),
+                                                  ),
+                                                  padding: const EdgeInsets.symmetric(vertical: 14),
+                                                ),
+                                                child: const Text(
+                                                  'Batal',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(width: 12),
+
+                                            // Tombol Simpan
+                                            Expanded(
+                                              flex: 2,
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  gradient: const LinearGradient(
+                                                    colors: [
+                                                      Color(0xFFFFB300), // Amber
+                                                      Color(0xFFFFC107), // Slightly lighter amber
+                                                    ],
+                                                  ),
+                                                  borderRadius: BorderRadius.circular(12),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: const Color(0xFFFFB300).withOpacity(0.3),
+                                                      blurRadius: 8,
+                                                      offset: const Offset(0, 3),
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: ElevatedButton(
+                                                  onPressed: () {
+                                                    // Implementasi logika simpan informasi
+                                                    Navigator.pop(context);
+                                                    // Tambahkan logika untuk memperbarui informasi di sini
+                                                  },
+                                                  style: ElevatedButton.styleFrom(
+                                                    backgroundColor: Colors.transparent,
+                                                    foregroundColor: const Color(0xFF6D4C00),
+                                                    elevation: 0,
+                                                    shadowColor: Colors.transparent,
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(12),
+                                                    ),
+                                                    padding: const EdgeInsets.symmetric(vertical: 14),
+                                                  ),
+                                                  child: const Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.check_circle,
+                                                        color: Color.fromARGB(255, 255, 255, 255),
+                                                        size: 20,
+                                                      ),
+                                                      SizedBox(width: 8),
+                                                      Text(
+                                                        'Simpan Perubahan',
+                                                        style: TextStyle(
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: 14,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 10),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
@@ -794,7 +877,7 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
    @override
   Widget build(BuildContext context) {
     // Warna tema kekuningan
-    final Color primaryYellow = Color(0xFFFFCC00);
+    final Color primaryYellow = Color(0xFFFFB300);
     final Color secondaryYellow = Color(0xFFFFF5D6);
     final Color darkYellow = Color(0xFFD4A400);
     final Color textColor = Color(0xFF5C4D00);
@@ -1006,7 +1089,7 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFFFCC00),
+                    backgroundColor: const Color(0xFFFFB300),
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),

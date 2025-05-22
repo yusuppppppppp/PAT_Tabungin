@@ -5,6 +5,10 @@ import 'package:tabungin/app/modules/lupa_pw/views/lupa_pw_view.dart';
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
+  // Hardcoded credentials
+  static const String validEmail = "aku@gmail.com";
+  static const String validPassword = "aku123";
+
   void _showGoogleAccountSelectionPopup(BuildContext context) {
     showDialog(
       context: context,
@@ -88,8 +92,36 @@ class LoginView extends StatelessWidget {
     );
   }
 
+  void _login(BuildContext context, String email, String password) {
+    if (email.trim() == validEmail && password == validPassword) {
+      // Login successful
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeView()),
+      );
+    } else {
+      // Login failed - show error dialog
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text("Login Gagal"),
+          content: Text("Email atau password salah. Silakan coba lagi."),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text("OK"),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
@@ -143,14 +175,15 @@ class LoginView extends StatelessWidget {
                   ),
                   SizedBox(height: 8.0),
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.7, // Reduced width to 70% of screen
+                    width: MediaQuery.of(context).size.width * 0.7,
                     child: TextFormField(
+                      controller: emailController,
                       decoration: InputDecoration(
                         hintText: "Enter your Email here",
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 11.0), // Smaller hint text
+                        hintStyle: TextStyle(color: Colors.grey, fontSize: 11.0),
                         filled: true,
                         fillColor: Color(0xFFFFF9C4),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0), // Smaller padding
+                        contentPadding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.0),
                           borderSide: BorderSide(color: const Color(0xFFFFC107)),
@@ -173,15 +206,16 @@ class LoginView extends StatelessWidget {
                   ),
                   SizedBox(height: 8.0),
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.7, // Reduced width to 70% of screen
+                    width: MediaQuery.of(context).size.width * 0.7,
                     child: TextFormField(
+                      controller: passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
                         hintText: "Enter your Password here",
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 11.0), // Smaller hint text
+                        hintStyle: TextStyle(color: Colors.grey, fontSize: 11.0),
                         filled: true,
                         fillColor: Color(0xFFFFF9C4),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0), // Smaller padding
+                        contentPadding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.0),
                           borderSide: BorderSide(color: const Color(0xFFFFC107)),
@@ -193,7 +227,6 @@ class LoginView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Menambahkan teks Lupa Password di bagian kanan
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -216,10 +249,7 @@ class LoginView extends StatelessWidget {
                   const SizedBox(height: 16.0),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomeView()),
-                      );
+                      _login(context, emailController.text, passwordController.text);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF252D70),
@@ -259,6 +289,7 @@ class LoginView extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 16.0),
                 ],
               ),
             ),
