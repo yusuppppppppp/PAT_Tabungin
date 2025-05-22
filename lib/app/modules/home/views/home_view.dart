@@ -158,7 +158,6 @@ class SavingsBottomSheet {
     final Color lightOrange = const Color(0xFFFFCC80);
     final Color Hitam = const Color.fromARGB(255, 0, 0, 0);
 
-
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -204,7 +203,7 @@ class SavingsBottomSheet {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  
+
                   // Header dengan icon dekoratif
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -233,7 +232,7 @@ class SavingsBottomSheet {
                     ],
                   ),
                   const SizedBox(height: 28),
-                  
+
                   // Nominal Field
                   Text(
                     'Nominal',
@@ -267,7 +266,8 @@ class SavingsBottomSheet {
                         filled: true,
                         fillColor: Colors.white,
                         prefixIcon: Padding(
-                          padding: const EdgeInsets.only(left: 16.0, right: 8.0),
+                          padding:
+                              const EdgeInsets.only(left: 16.0, right: 8.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -287,7 +287,8 @@ class SavingsBottomSheet {
                           color: Colors.grey.shade400,
                           fontSize: 15,
                         ),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 16),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide.none,
@@ -310,7 +311,7 @@ class SavingsBottomSheet {
                     ),
                   ),
                   const SizedBox(height: 20),
-                   
+
                   // Tanggal Field
                   Text(
                     'Tanggal',
@@ -391,7 +392,7 @@ class SavingsBottomSheet {
                     ),
                   ),
                   const SizedBox(height: 32),
-                  
+
                   // Button
                   SizedBox(
                     width: double.infinity,
@@ -399,20 +400,17 @@ class SavingsBottomSheet {
                     child: ElevatedButton(
                       onPressed: () {
                         if (amountController.text.isNotEmpty) {
-                          Navigator.pop(context); // Menutup BottomSheet
-                          BottomNavigationController controller = Get.find();
-                          controller.updateIndex(2); // Beralih ke halaman QRCodeView
+                          Get.back(); // Gunakan Get.back() sebagai pengganti Navigator.pop
                         } else {
-                          // Tampilkan animasi shake pada field nominal
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: const Text('Harap masukkan nominal'),
-                              backgroundColor: darkOrange,
-                              behavior: SnackBarBehavior.floating,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
+                          Get.snackbar(
+                            'Peringatan', // Judul snackbar
+                            'Harap masukkan nominal', // Isi snackbar
+                            backgroundColor: darkOrange,
+                            snackPosition: SnackPosition.BOTTOM,
+                            borderRadius: 10,
+                            margin: const EdgeInsets.all(10),
+                            colorText: Colors.white,
+                            duration: const Duration(seconds: 2),
                           );
                         }
                       },
@@ -425,22 +423,18 @@ class SavingsBottomSheet {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            'Selanjutnya',
+                          Text(
+                            'Konfirmasi',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(width: 8),
-                          Icon(
-                            Icons.arrow_forward_rounded,
-                            color: Colors.white.withOpacity(0.9),
-                          ),
+                          SizedBox(width: 8),
                         ],
                       ),
                     ),
@@ -454,7 +448,6 @@ class SavingsBottomSheet {
     );
   }
 }
-
 
 // Rest of the code remains the same...
 class HomePageContent extends StatelessWidget {
@@ -1041,7 +1034,6 @@ class _TopUpFormBottomSheetState extends State<TopUpFormBottomSheet> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 40),
               Container(
                 padding: EdgeInsets.all(20),
@@ -1090,7 +1082,7 @@ class _TopUpFormBottomSheetState extends State<TopUpFormBottomSheet> {
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               color: primaryYellow,
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(10.5),
                                 bottomLeft: Radius.circular(10.5),
                               ),
