@@ -29,7 +29,7 @@ class ResetPwView extends GetView<ResetPwController> {
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
-                    // Yellow background section with illustration
+                    // Yellow background section with illustration and shadow
                     Container(
                       width: double.infinity,
                       height: MediaQuery.of(context).size.height * 0.45, // Reduced height
@@ -39,6 +39,20 @@ class ResetPwView extends GetView<ResetPwController> {
                           bottomLeft: Radius.circular(80),
                           bottomRight: Radius.circular(80),
                         ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0x40000000), // Black with 25% opacity
+                            offset: Offset(0, 8), // Shadow position (x, y)
+                            blurRadius: 16, // Blur intensity
+                            spreadRadius: 0, // How much the shadow spreads
+                          ),
+                          BoxShadow(
+                            color: Color(0x20000000), // Black with 12.5% opacity for softer shadow
+                            offset: Offset(0, 4), // Closer shadow position
+                            blurRadius: 8, // Less blur for subtle effect
+                            spreadRadius: 0,
+                          ),
+                        ],
                       ),
                       child: Stack(
                         children: [

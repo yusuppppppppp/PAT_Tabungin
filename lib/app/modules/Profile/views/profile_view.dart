@@ -429,10 +429,10 @@ class ProfileView extends GetView<ProfileController> {
                 // Handle untuk drag
                 Center(
                   child: Container(
-                    width: 40,
+                    width: 50,
                     height: 5,
                     decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: const Color(0xFFFFB300),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     margin: const EdgeInsets.only(bottom: 20),
@@ -481,7 +481,7 @@ class ProfileView extends GetView<ProfileController> {
                       child: IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.edit_document),
-                        color: const Color(0xFFFBBC04),
+                        color: const Color(0xFFFFB300),
                         padding: EdgeInsets.zero,
                       ),
                     ),
@@ -496,7 +496,7 @@ class ProfileView extends GetView<ProfileController> {
                   label: 'Nama Lengkap',
                   icon: Icons.person,
                   controller: nameController,
-                  iconColor: const Color(0xFFFFC107),
+                  iconColor: const Color(0xFFFFB300),
                 ),
                 const SizedBox(height: 16),
 
@@ -568,8 +568,8 @@ class ProfileView extends GetView<ProfileController> {
                           // Tambahkan logika untuk memperbarui informasi di sini
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          foregroundColor: Colors.white,
+                          backgroundColor: const Color(0xFFFFB300),
+                          foregroundColor: const Color(0xFF6D4C00),
                           elevation: 2,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -581,7 +581,7 @@ class ProfileView extends GetView<ProfileController> {
                           children: [
                             Icon(
                               Icons.check_circle,
-                              color: Color(0xFFFFC107),
+                              color: Color.fromARGB(255, 255, 255, 255),
                               size: 20,
                             ),
                             SizedBox(width: 8),
@@ -615,6 +615,7 @@ class ProfileView extends GetView<ProfileController> {
     required TextEditingController controller,
     Color iconColor = Colors.black,
     TextInputType keyboardType = TextInputType.text,
+
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -624,7 +625,7 @@ class ProfileView extends GetView<ProfileController> {
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 14,
-            color: Colors.black87,
+            color: Color.fromRGBO(0, 0, 0, 0.867),
           ),
         ),
         const SizedBox(height: 8),
@@ -642,7 +643,7 @@ class ProfileView extends GetView<ProfileController> {
               prefixIcon: Icon(icon, color: iconColor),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.symmetric(vertical: 14),
-              hintStyle: TextStyle(color: const Color(0xFFBDBDBD)),
+              hintStyle: const TextStyle(color: Color(0xFFBDBDBD)),
             ),
           ),
         ),
