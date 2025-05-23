@@ -100,7 +100,7 @@ class ProfileView extends GetView<ProfileController> {
                 // Avatar and Username
                 Positioned(
                   top: 60,
-                  left: MediaQuery.of(context).size.width / 2 - 50,
+                  left: MediaQuery.of(context).size.width / 2 - 57,
                   child: Column(
                     children: [
                       // Avatar

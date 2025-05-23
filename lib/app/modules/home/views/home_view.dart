@@ -580,7 +580,7 @@ class HomePageContent extends StatelessWidget {
                           asset: 'assets/image/home/Group71.png',
                           imageHeight: 80,
                           onTap: () {
-                            SavingsBottomSheet.showBottomSheet(
+                            TabunganWajib.showBottomSheet(
                               context: context,
                               title: 'Wajib',
                               buttonColor: const Color(0xFFFF9800), // Green
@@ -1320,6 +1320,359 @@ class BarcodeBottomSheet extends StatelessWidget {
           const SizedBox(height: 20),
         ],
       ),
+    );
+  }
+}
+
+class TabunganWajib {
+  static void showBottomSheet({
+    required BuildContext context,
+    required String title,
+    required Color buttonColor,
+    String? subtitle,
+  }) {
+    DateTime selectedDate = DateTime.now();
+    int selectedNominal = 0; // Nominal yang dipilih
+    
+    // Daftar pilihan nominal bulanan
+    final List<Map<String, dynamic>> nominalOptions = [
+      {'label': '1 Bulan', 'amount': 20000, 'description': 'Rp. 20.000'},
+      {'label': '2 Bulan', 'amount': 40000, 'description': 'Rp. 40.000'},
+      {'label': '3 Bulan', 'amount': 60000, 'description': 'Rp. 60.000'},
+      {'label': '6 Bulan', 'amount': 80000, 'description': 'Rp. 80.000'},
+    ];
+
+    // Warna tema oranye yang konsisten
+    final Color primaryOrange = const Color(0xFFFFA726);
+    final Color darkOrange = const Color(0xFFE65100);
+    final Color lightOrange = const Color(0xFFFFCC80);
+    final Color Black = const Color.fromARGB(255, 0, 0, 0);
+    final Color Oranye = const Color(0xFFFDB623);
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      builder: (context) {
+        return StatefulBuilder(builder: (context, setState) {
+          return AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(24),
+                topRight: Radius.circular(24),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: darkOrange.withOpacity(0.2),
+                  spreadRadius: 1,
+                  blurRadius: 10,
+                  offset: const Offset(0, -2),
+                ),
+              ],
+            ),
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Handle bar di bagian atas
+                  Center(
+                    child: Container(
+                      width: 60,
+                      height: 5,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFFC300),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Header dengan icon dekoratif
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Black,
+                            ),
+                          ),
+                          if (subtitle != null)
+                            Text(
+                              subtitle,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey.shade600,
+                              ),
+                            ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 28),
+
+                  // Pilihan Nominal
+                  Text(
+                    'Pilih Periode Pembayaran',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey.shade800,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  
+                  // Grid pilihan nominal
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 2.5,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                    ),
+                    itemCount: nominalOptions.length,
+                    itemBuilder: (context, index) {
+                      final option = nominalOptions[index];
+                      final isSelected = selectedNominal == option['amount'];
+                      
+                      return InkWell(
+                        onTap: () {
+                          setState(() {
+                            selectedNominal = option['amount'];
+                          });
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          decoration: BoxDecoration(
+                            color: isSelected ? Oranye.withOpacity(0.1) : Colors.white,
+                            border: Border.all(
+                              color: isSelected ? Oranye : lightOrange,
+                              width: isSelected ? 2 : 1.5,
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: isSelected 
+                                    ? Oranye.withOpacity(0.2)
+                                    : Colors.grey.withOpacity(0.1),
+                                spreadRadius: 1,
+                                blurRadius: 3,
+                                offset: const Offset(0, 1),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                option['label'],
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: isSelected ? Oranye : Colors.grey.shade700,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                option['description'],
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: isSelected ? Oranye : Colors.grey.shade600,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Tampilkan nominal yang dipilih
+                  if (selectedNominal > 0)
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Oranye.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Oranye.withOpacity(0.3)),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Nominal Terpilih',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey.shade700,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Rp. ${selectedNominal.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Oranye,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  const SizedBox(height: 20),
+
+                  // Tanggal Field
+                  Text(
+                    'Tanggal',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey.shade800,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  InkWell(
+                    onTap: () async {
+                      final DateTime? picked = await showDatePicker(
+                        context: context,
+                        initialDate: selectedDate,
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2100),
+                        builder: (context, child) {
+                          return Theme(
+                            data: Theme.of(context).copyWith(
+                              colorScheme: ColorScheme.light(
+                                primary: primaryOrange,
+                                onPrimary: Colors.white,
+                                onSurface: Colors.black,
+                              ),
+                            ),
+                            child: child!,
+                          );
+                        },
+                      );
+                      if (picked != null && picked != selectedDate) {
+                        setState(() {
+                          selectedDate = picked;
+                        });
+                      }
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 16,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: lightOrange, width: 1.5),
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 3,
+                            offset: const Offset(0, 1),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.calendar_today,
+                            size: 20,
+                            color: darkOrange,
+                          ),
+                          const SizedBox(width: 12),
+                          Text(
+                            DateFormat('dd MMMM yyyy').format(selectedDate),
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.grey.shade800,
+                            ),
+                          ),
+                          const Spacer(),
+                          Icon(
+                            Icons.arrow_drop_down,
+                            color: primaryOrange,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+
+                  // Button
+                  SizedBox(
+                    width: double.infinity,
+                    height: 54,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (selectedNominal > 0) {
+                          Get.back(); // Gunakan Get.back() sebagai pengganti Navigator.pop
+                          // Di sini Anda bisa menambahkan logika untuk menyimpan data
+                          // print('Nominal: $selectedNominal, Tanggal: $selectedDate');
+                        } else {
+                          Get.snackbar(
+                            'Peringatan', // Judul snackbar
+                            'Harap pilih periode pembayaran', // Isi snackbar
+                            backgroundColor: darkOrange,
+                            snackPosition: SnackPosition.BOTTOM,
+                            borderRadius: 10,
+                            margin: const EdgeInsets.all(10),
+                            colorText: Colors.white,
+                            duration: const Duration(seconds: 2),
+                          );
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Oranye,
+                        foregroundColor: Colors.white,
+                        shadowColor: primaryOrange.withOpacity(0.5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Konfirmasi',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(width: 8),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+      },
     );
   }
 }
