@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tabungin/app/modules/login-register/views/login_register_view.dart'; // Pastikan impor file yang berisi LoginRegisterView
+import 'package:tabungin/app/modules/login-register/views/login_register_view.dart'; 
 
 class WelcomePageView extends StatelessWidget {
   const WelcomePageView({super.key});
@@ -8,13 +8,13 @@ class WelcomePageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:
-          const Color(0xFFFFC300), // Warna kuning sebagai background
+          const Color(0xFFFFC300), 
       body: Column(
         children: [
           Expanded(
             child: Container(
               margin:
-                  const EdgeInsets.only(bottom: 10), // Menambah margin bawah
+                  const EdgeInsets.only(bottom: 10), 
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -23,9 +23,9 @@ class WelcomePageView extends StatelessWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black26, // Warna bayangan
-                    offset: Offset(0, 5), // Arah bayangan
-                    blurRadius: 10, // Radius bayangan
+                    color: Colors.black26, 
+                    offset: Offset(0, 5), 
+                    blurRadius: 10, 
                   ),
                 ],
               ),
@@ -46,9 +46,9 @@ class WelcomePageView extends StatelessWidget {
                             );
                           },
                           child: const Icon(
-                            Icons.arrow_forward_rounded, // Menggunakan ikon baru
-                            size: 32, // Ukuran ikon lebih besar
-                            color: Colors.black, // Warna ikon
+                            Icons.arrow_forward_rounded, 
+                            size: 32, 
+                            color: Colors.black, 
                           ),
                         ),
                       ),
@@ -56,7 +56,7 @@ class WelcomePageView extends StatelessWidget {
                     Expanded(
                       child: Center(
                         child: Image.asset(
-                          'assets/image/awalan/Group6.png', // Tambahkan gambar ini ke folder assets
+                          'assets/image/awalan/Group6.png', 
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -69,21 +69,21 @@ class WelcomePageView extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: 20, vertical: 10), // Mengurangi padding vertikal
+                horizontal: 20, vertical: 10), 
             child: Column(
               children: [
                 Container(
                   width: double.infinity,
-                  height: 5, // Ketebalan divider
+                  height: 5, 
                   margin: EdgeInsets.symmetric(
-                      horizontal: 120), // Indentasi kiri dan kanan
+                      horizontal: 120), 
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(10), // Radius border
+                    borderRadius: BorderRadius.circular(10), 
                   ),
                 ),
                 SizedBox(
-                    height: 30), // Menambahkan lebih banyak ruang sebelum teks
+                    height: 30), 
                 const Text(
                   'Selamat Datang',
                   style: TextStyle(
@@ -95,7 +95,7 @@ class WelcomePageView extends StatelessWidget {
                 SizedBox(height: 14),
                 Container(
                   width: MediaQuery.of(context).size.width *
-                      0.7, // Atur lebar tulisan (70% dari lebar layar)
+                      0.7, 
                   child: const Text(
                     'Tabungin adalah aplikasi yang membantu para siswa SMPN 7 Malang menyisihkan uang saku mereka untuk masa depan yang lebih cerah. Aplikasi ini berperan sebagai sarana atau perantara tabungan bagi siswa.',
                     textAlign: TextAlign.justify,
@@ -107,7 +107,7 @@ class WelcomePageView extends StatelessWidget {
                 ),
                 SizedBox(
                     height:
-                        70), // Memberi lebih banyak ruang antara teks dan bagian bawah
+                        70), 
                 const Align(
                   alignment: Alignment.center,
                   child: Text(

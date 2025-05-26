@@ -14,6 +14,7 @@ class _GoalsViewState extends State<GoalsView> {
     return Scaffold(
       body: Stack(
         children: [
+
           // Main content
           Padding(
             padding:
@@ -111,6 +112,7 @@ class _GoalsViewState extends State<GoalsView> {
               ],
             ),
           ),
+
           // Fixed header
           Positioned(
             top: 0,
@@ -161,7 +163,7 @@ class _GoalsViewState extends State<GoalsView> {
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
               color:
-                  Color.fromARGB(255, 255, 255, 255), // Yellow background color
+                  Color.fromARGB(255, 255, 255, 255), 
             ),
             child: Padding(
               padding: const EdgeInsets.all(24),
@@ -169,6 +171,7 @@ class _GoalsViewState extends State<GoalsView> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
                   // Progress Card
                   Container(
                     width: double.infinity,
@@ -188,7 +191,6 @@ class _GoalsViewState extends State<GoalsView> {
                       padding: const EdgeInsets.all(16),
                       child: Row(
                         children: [
-                          // Yellow square with upload icon
                           Container(
                             width: 60,
                             height: 60,
@@ -205,6 +207,7 @@ class _GoalsViewState extends State<GoalsView> {
                             ),
                           ),
                           const SizedBox(width: 16),
+
                           // Progress details
                           Expanded(
                             child: Column(
@@ -277,13 +280,13 @@ class _GoalsViewState extends State<GoalsView> {
 
                   // Goal Input Field
                   Container(
-                    height: 50, // Smaller height
+                    height: 50, 
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
                           color: const Color(0xFFBDBDBD),
-                          width: 1), // Add black border
+                          width: 1), 
                     ),
                     child: TextField(
                       controller: goalController,
@@ -298,7 +301,7 @@ class _GoalsViewState extends State<GoalsView> {
                         fillColor: Color(0x52D4D4D4),
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 16,
-                            vertical: 12), // Reduced vertical padding
+                            vertical: 12), 
                       ),
                     ),
                   ),
@@ -317,13 +320,13 @@ class _GoalsViewState extends State<GoalsView> {
 
                   // Price Input Field
                   Container(
-                    height: 50, // Smaller height
+                    height: 50, 
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
                           color: const Color(0xFFBDBDBD),
-                          width: 1), // Add black border
+                          width: 1), 
                     ),
                     child: TextField(
                       controller: priceController,
@@ -339,7 +342,7 @@ class _GoalsViewState extends State<GoalsView> {
                         fillColor: Color(0x52D4D4D4),
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 16,
-                            vertical: 12), // Reduced vertical padding
+                            vertical: 12), 
                       ),
                     ),
                   ),
@@ -352,7 +355,6 @@ class _GoalsViewState extends State<GoalsView> {
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).pop();
-                        // Logic untuk menyimpan data
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFFFB300),
@@ -463,9 +465,9 @@ class _GoalsViewState extends State<GoalsView> {
                         ),
                       ),
                       IconButton(
-                        padding: EdgeInsets.zero, // Hilangkan padding tambahan
+                        padding: EdgeInsets.zero, 
                         constraints:
-                            const BoxConstraints(), // Sesuaikan ukuran tombol
+                            const BoxConstraints(), 
                         icon: const Icon(
                           Icons.add_circle,
                           color: Color(0xFFFBBC04),
@@ -489,8 +491,8 @@ class _GoalsViewState extends State<GoalsView> {
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
                                     colors: [
-                                      Color.fromARGB(255, 255, 255, 255), // Light yellow
-                                      Color.fromARGB(255, 255, 255, 255), // Slightly deeper yellow
+                                      Color.fromARGB(255, 255, 255, 255), 
+                                      Color.fromARGB(255, 255, 255, 255), 
                                     ],
                                   ),
                                   borderRadius: BorderRadius.vertical(
@@ -516,7 +518,8 @@ class _GoalsViewState extends State<GoalsView> {
                                       mainAxisSize: MainAxisSize.min,
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-                                        // Header dengan accent line
+
+                                        // Header 
                                         Column(
                                           crossAxisAlignment: CrossAxisAlignment.center,
                                           children: [
@@ -534,14 +537,13 @@ class _GoalsViewState extends State<GoalsView> {
                                               style: TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.bold,
-                                                color: Color(0xFF6D4C00), // Dark golden brown
+                                                color: Color(0xFF6D4C00), 
                                               ),
                                             ),
                                           ],
                                         ),
                                         const SizedBox(height: 40),
                                         
-                                        // TextField dengan styling kuning
                                         TextField(
                                           controller: _controller,
                                           keyboardType: TextInputType.number,
@@ -557,7 +559,7 @@ class _GoalsViewState extends State<GoalsView> {
                                               fontSize: 14,
                                             ),
                                             filled: true,
-                                            fillColor: const Color(0xFFFFFBF0), // Very light yellow
+                                            fillColor: const Color(0xFFFFFBF0), 
                                             border: OutlineInputBorder(
                                               borderRadius: BorderRadius.circular(12),
                                               borderSide: const BorderSide(
@@ -587,7 +589,6 @@ class _GoalsViewState extends State<GoalsView> {
                                         ),
                                         const SizedBox(height: 40),
                                         
-                                        // Buttons dengan tema kuning
                                         Row(
                                           children: [
                                             // Tombol Batal
@@ -596,7 +597,7 @@ class _GoalsViewState extends State<GoalsView> {
                                               child: ElevatedButton(
                                                 onPressed: () => Navigator.pop(context),
                                                 style: ElevatedButton.styleFrom(
-                                                  backgroundColor: const Color.fromARGB(255, 255, 0, 0), // Light orange-yellow
+                                                  backgroundColor: const Color.fromARGB(255, 255, 0, 0), 
                                                   foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                                                   elevation: 0,
                                                   shadowColor: Colors.transparent,
@@ -627,8 +628,8 @@ class _GoalsViewState extends State<GoalsView> {
                                                 decoration: BoxDecoration(
                                                   gradient: const LinearGradient(
                                                     colors: [
-                                                      Color(0xFFFFB300), // Amber
-                                                      Color(0xFFFFC107), // Slightly lighter amber
+                                                      Color(0xFFFFB300), 
+                                                      Color(0xFFFFC107), 
                                                     ],
                                                   ),
                                                   borderRadius: BorderRadius.circular(12),
@@ -642,9 +643,7 @@ class _GoalsViewState extends State<GoalsView> {
                                                 ),
                                                 child: ElevatedButton(
                                                   onPressed: () {
-                                                    // Implementasi logika simpan informasi
                                                     Navigator.pop(context);
-                                                    // Tambahkan logika untuk memperbarui informasi di sini
                                                   },
                                                   style: ElevatedButton.styleFrom(
                                                     backgroundColor: Colors.transparent,
@@ -828,18 +827,14 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
   @override
   void initState() {
     super.initState();
-    // Start with "0" so the prefix is visible immediately
     _amountController.text = "0";
   }
 
-  // Format currency to Rupiah
   String _formatCurrency(String value) {
     if (value.isEmpty) return '0';
 
-    // Remove non-digit characters
     String digits = value.replaceAll(RegExp(r'[^\d]'), '');
 
-    // Format with thousand separators
     final formatter = NumberFormat("#,###", "id_ID");
     if (digits.isNotEmpty) {
       return formatter.format(int.parse(digits));
@@ -868,15 +863,13 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
   }
 
   void _navigateToNextPage() {
-    Navigator.pop(context); // Close current bottom sheet
+    Navigator.pop(context); 
 
-    // Navigate to the next page (replace with your actual navigation)
     Navigator.pushNamed(context, '/q-r-code');
   }
 
    @override
   Widget build(BuildContext context) {
-    // Warna tema kekuningan
     final Color primaryYellow = Color(0xFFFFB300);
     final Color secondaryYellow = Color(0xFFFFF5D6);
     final Color darkYellow = Color(0xFFD4A400);
@@ -948,10 +941,9 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
                       ),
                       child: Row(
                         children: [
-                          // Fixed Prefix container with correct height and styling
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
-                            height: 54, // Match the height of TextFormField
+                            height: 54, 
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               color: primaryYellow,
@@ -969,7 +961,7 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
                               ),
                             ),
                           ),
-                          // Text field tanpa border
+
                           Expanded(
                             child: TextFormField(
                               controller: _amountController,
@@ -986,7 +978,7 @@ class _WithdrawFormBottomSheetState extends State<WithdrawFormBottomSheet> {
                                 hintText: '0 Masukkan nominal withdraw',
                                 hintStyle: TextStyle(color: Colors.grey),
                                 errorStyle: TextStyle(
-                                    height: 0), // Hide error text inside field
+                                    height: 0), 
                               ),
 
                               // logic gwa matikan

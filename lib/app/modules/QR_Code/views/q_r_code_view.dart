@@ -10,13 +10,12 @@ class QRCodeView extends StatefulWidget {
 
 class _QRCodeViewState extends State<QRCodeView> {
   String scannedCode = "";
-  double zoomLevel = 1.0; // Initial zoom level
-  late MobileScannerController controller; // Controller for MobileScanner
+  late MobileScannerController controller; 
 
   @override
   void initState() {
     super.initState();
-    controller = MobileScannerController(); // Initialize the scanner controller
+    controller = MobileScannerController(); 
   }
 
   @override
@@ -25,14 +24,12 @@ class _QRCodeViewState extends State<QRCodeView> {
     super.dispose();
   }
 
-  /// Callback for QR code detection
   void onQRCodeDetected(String? code) {
     if (code != null && code != scannedCode) {
       setState(() {
         scannedCode = code;
       });
 
-      // Show the scanned QR code result in a dialog
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -57,15 +54,14 @@ class _QRCodeViewState extends State<QRCodeView> {
           Expanded(
             child: Stack(
               children: [
-                // QR Scanner Area
                 MobileScanner(
-                  controller: controller, // Attach the controller
+                  controller: controller, 
                   onDetect: (BarcodeCapture capture) {
                     final String? code = capture.barcodes.first.rawValue;
                     onQRCodeDetected(code);
                   },
                 ),
-                // Scanner Overlay Design
+                
                 Align(
                   alignment: Alignment.center,
                   child: Container(
@@ -80,7 +76,7 @@ class _QRCodeViewState extends State<QRCodeView> {
               ],
             ),
           ),
-          // Scanning Status
+
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: Text(

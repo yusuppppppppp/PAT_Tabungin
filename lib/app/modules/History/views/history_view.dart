@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HistoryView extends StatelessWidget {
-  const HistoryView({Key? key}) : super(key: key);
+  const HistoryView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +10,8 @@ class HistoryView extends StatelessWidget {
         children: [
           // Main content
           Padding(
-            padding: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top +
-                    80), // Adjusted to give space for the fixed header
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).padding.top + 80),
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               children: [
@@ -58,8 +57,8 @@ class HistoryView extends StatelessWidget {
                       child: IconButton(
                         onPressed: () {},
                         icon: Image.asset(
-                          'assets/icon/navbar/history.png', // Ganti dengan path aset Anda
-                          width: 24, // Sesuaikan ukuran gambar
+                          'assets/icon/navbar/history.png',
+                          width: 24,
                           height: 24,
                         ),
                         padding: EdgeInsets.zero,
@@ -67,8 +66,7 @@ class HistoryView extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(
-                    height: 16), // Add some spacing after the Goals row
+                const SizedBox(height: 16),
                 _buildTransactionItem(
                   icon: 'assets/image/history/kartu_tambah.png',
                   title: 'Top Up',
@@ -99,14 +97,15 @@ class HistoryView extends StatelessWidget {
               ],
             ),
           ),
-          // Fixed header with border radius on the bottom
+
+          // Fixed header
           Positioned(
             top: 0,
             left: 0,
             right: 0,
             child: Container(
               width: double.infinity,
-              height: 80, // Set fixed height for the header
+              height: 80,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -118,10 +117,8 @@ class HistoryView extends StatelessWidget {
                   ),
                 ],
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(
-                      16), // Add border radius on the bottom left
-                  bottomRight: Radius.circular(
-                      16), // Add border radius on the bottom right
+                  bottomLeft: Radius.circular(16),
+                  bottomRight: Radius.circular(16),
                 ),
               ),
             ),
@@ -189,9 +186,9 @@ class HistoryView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text(
+                  const Text(
                     'Transaction ID 564925374920',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
                       color: Colors.grey,
                     ),
@@ -228,7 +225,7 @@ class HistoryView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
-                // Separate date and time into individual Text widgets
+                
                 Text(
                   date,
                   style: const TextStyle(

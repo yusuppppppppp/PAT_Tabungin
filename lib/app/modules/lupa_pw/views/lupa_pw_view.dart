@@ -12,13 +12,11 @@ class LupaPwView extends GetView<LupaPwController> {
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       resizeToAvoidBottomInset: true,
       body: GestureDetector(
-        // Menyembunyikan keyboard ketika area bebas diketuk
         onTap: () {
           FocusScope.of(context).unfocus();
         },
         child: Stack(
           children: [
-            // Background dan ilustrasi
             SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Column(
@@ -54,7 +52,6 @@ class LupaPwView extends GetView<LupaPwController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Username field
                         const Text(
                           'Username',
                           style: TextStyle(
@@ -87,7 +84,6 @@ class LupaPwView extends GetView<LupaPwController> {
 
                         const SizedBox(height: 16),
 
-                        // Email field
                         const Text(
                           'Email',
                           style: TextStyle(
@@ -127,11 +123,10 @@ class LupaPwView extends GetView<LupaPwController> {
                             height: 50,
                             child: ElevatedButton(
                               onPressed: () {
-                                // Navigasi ke halaman ResetPwView
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ResetPwView()),
+                                      builder: (context) => const ResetPwView()),
                                 );
                               },
                               style: ElevatedButton.styleFrom(
@@ -152,7 +147,6 @@ class LupaPwView extends GetView<LupaPwController> {
                           ),
                         ),
 
-                        // Tambahkan spacing di bagian bawah agar tidak terlalu dekat dengan keyboard
                         const SizedBox(height: 20),
                       ],
                     ),
@@ -161,7 +155,6 @@ class LupaPwView extends GetView<LupaPwController> {
               ),
             ),
 
-            // Adjust padding for keyboard visibility
             Positioned.fill(
               child: Align(
                 alignment: Alignment.bottomCenter,

@@ -13,40 +13,38 @@ class RegisterView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Bagian atas dengan gambar menggunakan Stack dan Positioned
             SizedBox(
-              height: 370.0, // Mengurangi tinggi dari 350 ke 300
+              height: 370.0, 
               child: Stack(
                 children: [
-                  // Latar belakang
                   Container(
-                    height: 370.0, // Mengurangi tinggi agar sesuai dengan SizedBox
+                    height: 370.0, 
                     decoration: const BoxDecoration(
-                      color: Color(0xFFFFC300), // Warna kuning
+                      color: Color(0xFFFFC300), 
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(230.0),
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black26, // Warna bayangan
-                          offset: Offset(0, 4), // Posisi bayangan (x, y)
-                          blurRadius: 10.0, // Penyebaran bayangan
-                          spreadRadius: 1.0, // Jangkauan bayangan
+                          color: Colors.black26, 
+                          offset: Offset(0, 4), 
+                          blurRadius: 10.0, 
+                          spreadRadius: 1.0, 
                         ),
                       ],
                     ),
                   ),
-                  // Gambar di atas latar belakang
+                  
                   Positioned(
-                    top: 50, // Mengurangi jarak dari atas
+                    top: 50, 
                     left: 70,
                     right: 0,
                     child: Center(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: Image.asset(
-                          'assets/image/register/Group 4.png', // Path gambar
-                          height: 300, // Mengurangi ukuran gambar dari 250 ke 220
+                          'assets/image/register/Group 4.png', 
+                          height: 300, 
                         ),
                       ),
                     ),
@@ -56,9 +54,8 @@ class RegisterView extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            // Form registrasi - dibuat lebih kecil
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10.0), // Mengurangi padding vertical
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10.0), 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -66,21 +63,21 @@ class RegisterView extends StatelessWidget {
                   const Text(
                     "Username",
                     style: TextStyle(
-                      fontSize: 15.0, // Ukuran font lebih kecil
+                      fontSize: 15.0, 
                       fontWeight: FontWeight.bold,
                       color: Colors.blue,
                     ),
                   ),
-                  const SizedBox(height: 4.0), // Jarak lebih kecil
+                  const SizedBox(height: 4.0), 
                   TextFormField(
                     decoration: InputDecoration(
                       hintText: "Enter your Username here",
-                      hintStyle: const TextStyle(color: Colors.grey, fontSize: 11.0), // Font hint lebih kecil
+                      hintStyle: const TextStyle(color: Colors.grey, fontSize: 11.0), 
                       filled: true,
                       fillColor: const Color(0xFFFFF9C4),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0), // Padding dalam input lebih kecil
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0), 
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0), // Border radius lebih kecil
+                        borderRadius: BorderRadius.circular(10.0), 
                         borderSide: const BorderSide(color: Colors.amber),
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -88,29 +85,29 @@ class RegisterView extends StatelessWidget {
                         borderSide: const BorderSide(color: Colors.amber),
                       ),
                     ),
-                    style: const TextStyle(fontSize: 13.0), // Ukuran teks input lebih kecil
+                    style: const TextStyle(fontSize: 13.0), 
                   ),
-                  const SizedBox(height: 10.0), // Jarak antar field lebih kecil
+                  const SizedBox(height: 10.0), 
                   
                   // Input Email
                   const Text(
                     "Email",
                     style: TextStyle(
-                      fontSize: 15.0, // Ukuran font lebih kecil
+                      fontSize: 15.0, 
                       fontWeight: FontWeight.bold,
                       color: Colors.blue,
                     ),
                   ),
-                  const SizedBox(height: 4.0), // Jarak lebih kecil
+                  const SizedBox(height: 4.0), 
                   TextFormField(
                     decoration: InputDecoration(
                       hintText: "Enter your Email here",
-                      hintStyle: const TextStyle(color: Colors.grey, fontSize: 11.0), // Font hint lebih kecil
+                      hintStyle: const TextStyle(color: Colors.grey, fontSize: 11.0), 
                       filled: true,
                       fillColor: const Color(0xFFFFF9C4),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0), // Padding dalam input lebih kecil
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0), 
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0), // Border radius lebih kecil
+                        borderRadius: BorderRadius.circular(10.0), 
                         borderSide: const BorderSide(color: Colors.amber),
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -118,30 +115,30 @@ class RegisterView extends StatelessWidget {
                         borderSide: const BorderSide(color: Colors.amber),
                       ),
                     ),
-                    style: const TextStyle(fontSize: 13.0), // Ukuran teks input lebih kecil
+                    style: const TextStyle(fontSize: 13.0), 
                   ),
-                  const SizedBox(height: 10.0), // Jarak antar field lebih kecil
+                  const SizedBox(height: 10.0), 
                   
                   // Input Password
                   const Text(
                     "Password",
                     style: TextStyle(
-                      fontSize: 15.0, // Ukuran font lebih kecil
+                      fontSize: 15.0, 
                       fontWeight: FontWeight.bold,
                       color: Colors.blue,
                     ),
                   ),
-                  const SizedBox(height: 4.0), // Jarak lebih kecil
+                  const SizedBox(height: 4.0), 
                   TextFormField(
                     obscureText: true,
                     decoration: InputDecoration(
                       hintText: "Enter your Password here",
-                      hintStyle: const TextStyle(color: Colors.grey, fontSize: 11.0), // Font hint lebih kecil
+                      hintStyle: const TextStyle(color: Colors.grey, fontSize: 11.0), 
                       filled: true,
                       fillColor: const Color(0xFFFFF9C4),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0), // Padding dalam input lebih kecil
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0), 
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0), // Border radius lebih kecil
+                        borderRadius: BorderRadius.circular(10.0), 
                         borderSide: const BorderSide(color: Color(0xFFFFC107)),
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -149,14 +146,12 @@ class RegisterView extends StatelessWidget {
                         borderSide: const BorderSide(color: Color(0xFFFFC107)),
                       ),
                     ),
-                    style: const TextStyle(fontSize: 13.0), // Ukuran teks input lebih kecil
+                    style: const TextStyle(fontSize: 13.0), 
                   ),
                   const SizedBox(height: 30.0),
                   
-                  // Tombol REGISTER
                   ElevatedButton(
                     onPressed: () {
-                      // Navigasi ke halaman LoginView
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const LoginView()),
@@ -164,7 +159,7 @@ class RegisterView extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF252D70),
-                      padding: const EdgeInsets.symmetric(vertical: 10.0), // Tinggi tombol lebih kecil
+                      padding: const EdgeInsets.symmetric(vertical: 10.0), 
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25.0),
                       ),
@@ -173,24 +168,23 @@ class RegisterView extends StatelessWidget {
                       'REGISTER',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 14.0, // Font pada tombol lebih kecil
+                        fontSize: 14.0, 
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 12.0), // Jarak lebih kecil
+                  const SizedBox(height: 12.0), 
                   
-                  // Teks untuk login
+                  
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
                         "Sudah punya akun ? ",
-                        style: TextStyle(color: Colors.black, fontSize: 12.0), // Font lebih kecil
+                        style: TextStyle(color: Colors.black, fontSize: 12.0), 
                       ),
                       GestureDetector(
                         onTap: () {
-                          // Navigasi ke halaman LoginView
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => const LoginView()),
@@ -201,7 +195,7 @@ class RegisterView extends StatelessWidget {
                           style: TextStyle(
                             color: Color(0xFFFFC300),
                             fontWeight: FontWeight.bold,
-                            fontSize: 12.0, // Font lebih kecil
+                            fontSize: 12.0, 
                           ),
                         ),
                       ),

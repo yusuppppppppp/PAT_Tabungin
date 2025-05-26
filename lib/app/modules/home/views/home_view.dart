@@ -75,7 +75,7 @@ class HomeView extends StatelessWidget {
                   index: 1,
                   controller: controller,
                 ),
-                const SizedBox(width: 40), // Placeholder untuk FAB
+                const SizedBox(width: 40), 
                 _buildBottomNavItem(
                   assetPath: 'assets/icon/navbar/history.png',
                   label: 'History',
@@ -141,7 +141,7 @@ class HomeView extends StatelessWidget {
   }
 }
 
-// Class SavingsBottomSheet untuk handle bottom sheet
+// tabungan 
 class SavingsBottomSheet {
   static void showBottomSheet({
     required BuildContext context,
@@ -152,7 +152,6 @@ class SavingsBottomSheet {
     final TextEditingController amountController = TextEditingController();
     DateTime selectedDate = DateTime.now();
 
-    // Warna tema oranye yang konsisten
     final Color primaryOrange = const Color(0xFFFFA726);
     final Color darkOrange = const Color(0xFFE65100);
     final Color lightOrange = const Color(0xFFFFCC80);
@@ -169,7 +168,7 @@ class SavingsBottomSheet {
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeOut,
             decoration: BoxDecoration(
-              color: Colors.white, // Hanya warna putih
+              color: Colors.white, 
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(24),
                 topRight: Radius.circular(24),
@@ -192,7 +191,7 @@ class SavingsBottomSheet {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Handle bar di bagian atas
+                  
                   Center(
                     child: Container(
                       width: 60,
@@ -205,7 +204,6 @@ class SavingsBottomSheet {
                   ),
                   const SizedBox(height: 16),
 
-                  // Header dengan icon dekoratif
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -234,7 +232,6 @@ class SavingsBottomSheet {
                   ),
                   const SizedBox(height: 28),
 
-                  // Nominal Field
                   Text(
                     'Nominal',
                     style: TextStyle(
@@ -450,13 +447,11 @@ class SavingsBottomSheet {
   }
 }
 
-// Rest of the code remains the same...
 class HomePageContent extends StatelessWidget {
   const HomePageContent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Get access to the BottomNavigationController
     final BottomNavigationController navController =
         Get.find<BottomNavigationController>();
 
@@ -570,7 +565,6 @@ class HomePageContent extends StatelessWidget {
                   ),
                   const SizedBox(height: 30),
 
-                  // Modified SavingsCard section with onTap functionality
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -583,7 +577,7 @@ class HomePageContent extends StatelessWidget {
                             TabunganWajib.showBottomSheet(
                               context: context,
                               title: 'Wajib',
-                              buttonColor: const Color(0xFFFF9800), // Green
+                              buttonColor: const Color(0xFFFF9800), 
                             );
                           },
                         ),
@@ -616,7 +610,7 @@ class HomePageContent extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 50), // Adding spacing after the cards
+                  const SizedBox(height: 50), 
                 ],
               ),
             ),
@@ -675,10 +669,8 @@ class HomePageContent extends StatelessWidget {
                     ),
                   ],
                 ),
-                // Made the CircleAvatar clickable and navigate to Profile
                 GestureDetector(
                   onTap: () {
-                    // Navigate to Profile tab (index 4)
                     navController.updateIndex(4);
                   },
                   child: const CircleAvatar(
@@ -695,6 +687,7 @@ class HomePageContent extends StatelessWidget {
     );
   }
 
+  // cuplikan goals
   Widget _buildGoalCard(
     BuildContext context, {
     required String title,
@@ -785,7 +778,7 @@ class SavingsCard extends StatelessWidget {
   final String title;
   final String asset;
   final double imageHeight;
-  final VoidCallback? onTap; // Added onTap callback
+  final VoidCallback? onTap; 
 
   const SavingsCard({
     super.key,
@@ -822,6 +815,7 @@ class SavingsCard extends StatelessWidget {
   }
 }
 
+// saldo anda
 class SavingsCardSection extends StatelessWidget {
   final double width;
   final double height;
@@ -905,11 +899,11 @@ class SavingsCardSection extends StatelessWidget {
                 ),
               ),
               Positioned(
-                left: 80, // Posisi gambar anjing di kanan
-                bottom: -90, // Mengatur gambar supaya tidak terlalu mepet
+                left: 80, 
+                bottom: -90, 
                 child: Image.asset(
                   'assets/image/home/Group7.png',
-                  height: 280, // Menyesuaikan tinggi gambar
+                  height: 280, 
                 ),
               ),
             ],
@@ -988,7 +982,7 @@ class _TopUpFormBottomSheetState extends State<TopUpFormBottomSheet> {
   }
 
   void _showBarcodeBottomSheet() {
-    Navigator.pop(context); // Close current bottom sheet
+    Navigator.pop(context); 
 
     showModalBottomSheet(
       context: context,
@@ -1004,7 +998,6 @@ class _TopUpFormBottomSheetState extends State<TopUpFormBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    // Warna tema kekuningan
     final Color primaryYellow = Color(0xFFFFB300);
     final Color secondaryYellow = Color(0xFFFFF5D6);
     final Color darkYellow = Color(0xFFD4A400);
@@ -1075,10 +1068,9 @@ class _TopUpFormBottomSheetState extends State<TopUpFormBottomSheet> {
                       ),
                       child: Row(
                         children: [
-                          // Fixed Prefix container with correct height and styling
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
-                            height: 54, // Match the height of TextFormField
+                            height: 54, 
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               color: primaryYellow,
@@ -1096,7 +1088,7 @@ class _TopUpFormBottomSheetState extends State<TopUpFormBottomSheet> {
                               ),
                             ),
                           ),
-                          // Text field tanpa border
+
                           Expanded(
                             child: TextFormField(
                               controller: _amountController,
@@ -1113,7 +1105,7 @@ class _TopUpFormBottomSheetState extends State<TopUpFormBottomSheet> {
                                 hintText: '0 Masukkan nominal top up',
                                 hintStyle: TextStyle(color: Colors.grey),
                                 errorStyle: TextStyle(
-                                    height: 0), // Hide error text inside field
+                                    height: 0), 
                               ),
 
                               // logic gwa matikan
@@ -1131,7 +1123,6 @@ class _TopUpFormBottomSheetState extends State<TopUpFormBottomSheet> {
                               // done
 
                               onChanged: (value) {
-                                // Remove initial "0" when user starts typing
                                 if (value.startsWith('0') && value.length > 1) {
                                   String newValue = value.substring(1);
                                   String formattedValue =
@@ -1142,7 +1133,6 @@ class _TopUpFormBottomSheetState extends State<TopUpFormBottomSheet> {
                                         offset: formattedValue.length),
                                   );
                                 } else {
-                                  // Normal formatting for other cases
                                   String formattedValue =
                                       _formatCurrency(value);
                                   _amountController.value = TextEditingValue(
@@ -1288,7 +1278,7 @@ class BarcodeBottomSheet extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             child: Image.asset(
-              'assets/image/top_up/qr.png', // Pastikan gambar barcode sudah ada
+              'assets/image/top_up/qr.png', 
               height: 150,
               fit: BoxFit.contain,
             ),
@@ -1382,7 +1372,6 @@ class TabunganWajib {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Handle bar di bagian atas
                   Center(
                     child: Container(
                       width: 60,
@@ -1395,7 +1384,6 @@ class TabunganWajib {
                   ),
                   const SizedBox(height: 16),
 
-                  // Header dengan icon dekoratif
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -1424,7 +1412,6 @@ class TabunganWajib {
                   ),
                   const SizedBox(height: 28),
 
-                  // Pilihan Nominal
                   Text(
                     'Pilih Periode Pembayaran',
                     style: TextStyle(
@@ -1435,7 +1422,6 @@ class TabunganWajib {
                   ),
                   const SizedBox(height: 20),
                   
-                  // Grid pilihan nominal
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -1504,7 +1490,6 @@ class TabunganWajib {
                   ),
                   const SizedBox(height: 20),
 
-                  // Tampilkan nominal yang dipilih
                   if (selectedNominal > 0)
                     Container(
                       width: double.infinity,
@@ -1539,7 +1524,6 @@ class TabunganWajib {
                     ),
                   const SizedBox(height: 20),
 
-                  // Tanggal Field
                   Text(
                     'Tanggal',
                     style: TextStyle(
@@ -1627,13 +1611,11 @@ class TabunganWajib {
                     child: ElevatedButton(
                       onPressed: () {
                         if (selectedNominal > 0) {
-                          Get.back(); // Gunakan Get.back() sebagai pengganti Navigator.pop
-                          // Di sini Anda bisa menambahkan logika untuk menyimpan data
-                          // print('Nominal: $selectedNominal, Tanggal: $selectedDate');
+                          Get.back(); 
                         } else {
                           Get.snackbar(
-                            'Peringatan', // Judul snackbar
-                            'Harap pilih periode pembayaran', // Isi snackbar
+                            'Peringatan', 
+                            'Harap pilih periode pembayaran', 
                             backgroundColor: darkOrange,
                             snackPosition: SnackPosition.BOTTOM,
                             borderRadius: 10,

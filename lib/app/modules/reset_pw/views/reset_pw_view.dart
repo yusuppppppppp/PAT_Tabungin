@@ -11,45 +11,42 @@ class ResetPwView extends GetView<ResetPwController> {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent, // Transparent status bar
-        statusBarIconBrightness: Brightness.dark, // Dark icons for light background
+        statusBarColor: Colors.transparent, 
+        statusBarIconBrightness: Brightness.dark, 
       ),
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         backgroundColor: Colors.white,
         body: GestureDetector(
-          // Hide keyboard when tapping outside of input fields
           onTap: () {
             FocusScope.of(context).unfocus();
           },
           child: Stack(
             children: [
-              // Scrollable content with bouncing physics
               SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
-                    // Yellow background section with illustration and shadow
                     Container(
                       width: double.infinity,
-                      height: MediaQuery.of(context).size.height * 0.45, // Reduced height
+                      height: MediaQuery.of(context).size.height * 0.45, 
                       decoration: const BoxDecoration(
-                        color: Color(0xFFFFC300), // Bright yellow background color
+                        color: Color(0xFFFFC300), 
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(80),
                           bottomRight: Radius.circular(80),
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Color(0x40000000), // Black with 25% opacity
-                            offset: Offset(0, 8), // Shadow position (x, y)
-                            blurRadius: 16, // Blur intensity
-                            spreadRadius: 0, // How much the shadow spreads
+                            color: Color(0x40000000), 
+                            offset: Offset(0, 8), 
+                            blurRadius: 16, 
+                            spreadRadius: 0, 
                           ),
                           BoxShadow(
-                            color: Color(0x20000000), // Black with 12.5% opacity for softer shadow
-                            offset: Offset(0, 4), // Closer shadow position
-                            blurRadius: 8, // Less blur for subtle effect
+                            color: Color(0x20000000), 
+                            offset: Offset(0, 4), 
+                            blurRadius: 8, 
                             spreadRadius: 0,
                           ),
                         ],
@@ -57,11 +54,11 @@ class ResetPwView extends GetView<ResetPwController> {
                       child: Stack(
                         children: [
                           Positioned(
-                            top: 70, // Adjusted position
+                            top: 70, 
                             left: 75,
                             child: Image.asset(
                               'assets/image/reset_pw/reset_pw.png',
-                              height: 280, // Reduced image size
+                              height: 280, 
                               fit: BoxFit.contain,
                             ),
                           ),
@@ -70,14 +67,12 @@ class ResetPwView extends GetView<ResetPwController> {
                     ),
                     const SizedBox(height: 60),
 
-                    // White background form section
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 12),
-                          // New Password Field
                           const Text(
                             'New Password',
                             style: TextStyle(
@@ -88,14 +83,14 @@ class ResetPwView extends GetView<ResetPwController> {
                           ),
                           const SizedBox(height: 6),
                           SizedBox(
-                            height: 50, // Reduced height
+                            height: 50, 
                             child: TextField(
                               obscureText: true,
                               decoration: InputDecoration(
                                 hintText: 'Enter your new password here',
                                 hintStyle: const TextStyle(color: Colors.grey, fontSize: 11),
                                 contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 13, vertical: 13), // Smaller padding
+                                    horizontal: 13, vertical: 13), 
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
                                   borderSide: const BorderSide(
@@ -117,9 +112,9 @@ class ResetPwView extends GetView<ResetPwController> {
                             ),
                           ),
 
-                          const SizedBox(height: 20), // Reduced spacing
+                          const SizedBox(height: 20), 
 
-                          // Confirm New Password Field
+                          
                           const Text(
                             'Confirm New Password',
                             style: TextStyle(
@@ -130,14 +125,14 @@ class ResetPwView extends GetView<ResetPwController> {
                           ),
                           const SizedBox(height: 6),
                           SizedBox(
-                            height: 50, // Reduced height
+                            height: 50, 
                             child: TextField(
                               obscureText: true,
                               decoration: InputDecoration(
                                 hintText: 'Enter your confirm new password here',
                                 hintStyle: const TextStyle(color: Colors.grey, fontSize: 11),
                                 contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 12), // Smaller padding
+                                    horizontal: 12, vertical: 12), 
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
                                   borderSide: const BorderSide(
@@ -159,16 +154,16 @@ class ResetPwView extends GetView<ResetPwController> {
                             ),
                           ),
 
-                          const SizedBox(height: 80), // Reduced spacing
+                          const SizedBox(height: 80), 
 
-                          // Confirm Button
+                          
                           SizedBox(
                             width: double.infinity,
-                            height: 50, // Reduced button height
+                            height: 50, 
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:
-                                    const Color(0xFF1E2C6B), // Dark blue button
+                                    const Color(0xFF1E2C6B), 
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25),
                                 ),
@@ -199,7 +194,6 @@ class ResetPwView extends GetView<ResetPwController> {
                 ),
               ),
 
-              // Adjust padding for keyboard visibility
               Positioned.fill(
                 child: Align(
                   alignment: Alignment.bottomCenter,

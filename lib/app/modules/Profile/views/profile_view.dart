@@ -5,7 +5,6 @@ import '../controllers/profile_controller.dart';
 class ProfileView extends GetView<ProfileController> {
   const ProfileView({super.key});
 
-// Fungsi Helper: Untuk membangun item summary
   Widget _buildSummaryItem({
     required String title,
     required double amount,
@@ -55,7 +54,6 @@ class ProfileView extends GetView<ProfileController> {
     );
   }
 
-// Fungsi Helper: Untuk memformat angka menjadi format mata uang
   String _formatCurrency(double amount) {
     return amount.toStringAsFixed(0).replaceAllMapped(
           RegExp(r'(\d)(?=(\d{3})+(?!\d))'),
@@ -70,13 +68,11 @@ class ProfileView extends GetView<ProfileController> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header with avatar and wave background
             Stack(
               clipBehavior: Clip.none,
               children: [
-                // Wave shadow
                 Positioned(
-                  top: 5, // Slightly shifted down from the original wave
+                  top: 5, 
                   left: 0,
                   right: 0,
                   child: CustomPaint(
@@ -85,7 +81,6 @@ class ProfileView extends GetView<ProfileController> {
                   ),
                 ),
 
-                // Wave background
                 ClipPath(
                   clipper: WaveClipper(),
                   child: Container(
@@ -97,7 +92,6 @@ class ProfileView extends GetView<ProfileController> {
                   ),
                 ),
 
-                // Avatar and Username
                 Positioned(
                   top: 60,
                   left: MediaQuery.of(context).size.width / 2 - 57,
@@ -177,7 +171,6 @@ class ProfileView extends GetView<ProfileController> {
                 ),
                 child: Column(
                   children: [
-                    // Summary Section
                     Container(
                       padding: const EdgeInsets.symmetric(
                           vertical: 16, horizontal: 20),
@@ -227,7 +220,6 @@ class ProfileView extends GetView<ProfileController> {
             ),
             const SizedBox(height: 50),
 
-            // Section Header
             Padding(
               padding: const EdgeInsets.only(left: 24, right: 24, bottom: 10),
               child: Row(
@@ -279,12 +271,11 @@ class ProfileView extends GetView<ProfileController> {
             ),
             const SizedBox(height: 15),
 
-            // User info cards dengan desain yang lebih compact
+            // User info
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  // Nama (full width)
                   _buildCompactInfoCard(
                     'Nama Lengkap',
                     'Yusuf Satria Putra Pratama',
@@ -295,10 +286,8 @@ class ProfileView extends GetView<ProfileController> {
 
                   const SizedBox(height: 10),
 
-                  // Baris untuk Kelas dan Telepon
                   Row(
                     children: [
-                      // Kelas - 40% width
                       Expanded(
                         flex: 4,
                         child: _buildCompactInfoCard(
@@ -311,7 +300,6 @@ class ProfileView extends GetView<ProfileController> {
                         ),
                       ),
                       const SizedBox(width: 10),
-                      // Telepon - 60% width
                       Expanded(
                         flex: 6,
                         child: _buildCompactInfoCard(
@@ -329,7 +317,6 @@ class ProfileView extends GetView<ProfileController> {
 
                   const SizedBox(height: 10),
 
-                  // Email (full width)
                   _buildCompactInfoCard(
                     'Email',
                     'gondetgendat@gmail.com',
@@ -394,9 +381,7 @@ class ProfileView extends GetView<ProfileController> {
     );
   }
 
-  // Fungsi untuk menampilkan bottom sheet form edit info pribadi
   void _showEditInfoBottomSheet(BuildContext context) {
-    // Inisialisasi controller untuk form
     final nameController =
         TextEditingController(text: 'Yusuf Satria Putra Pratama');
     final classController = TextEditingController(text: '9H');
@@ -407,13 +392,13 @@ class ProfileView extends GetView<ProfileController> {
     showModalBottomSheet(
       context: context,
       isScrollControlled:
-          true, // Memungkinkan modal untuk mengambil lebih banyak ruang
+          true, 
       backgroundColor: Colors
-          .transparent, // Membuat background transparan supaya bisa custom
+          .transparent, 
       builder: (context) => Container(
         padding: EdgeInsets.only(
           bottom:
-              MediaQuery.of(context).viewInsets.bottom, // Menghindari keyboard
+              MediaQuery.of(context).viewInsets.bottom, 
         ),
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -426,7 +411,6 @@ class ProfileView extends GetView<ProfileController> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Handle untuk drag
                 Center(
                   child: Container(
                     width: 50,
@@ -439,7 +423,6 @@ class ProfileView extends GetView<ProfileController> {
                   ),
                 ),
 
-                // Judul form
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -490,7 +473,6 @@ class ProfileView extends GetView<ProfileController> {
                 const SizedBox(height: 20),
 
                 // Form Fields
-                // 1. Nama Lengkap
                 _buildEditFormField(
                   context: context,
                   label: 'Nama Lengkap',
@@ -500,7 +482,6 @@ class ProfileView extends GetView<ProfileController> {
                 ),
                 const SizedBox(height: 16),
 
-                // 2. Kelas
                 _buildEditFormField(
                   context: context,
                   label: 'Kelas',
@@ -510,7 +491,6 @@ class ProfileView extends GetView<ProfileController> {
                 ),
                 const SizedBox(height: 16),
 
-                // 3. Nomor Telepon
                 _buildEditFormField(
                   context: context,
                   label: 'Nomor Telepon',
@@ -521,7 +501,6 @@ class ProfileView extends GetView<ProfileController> {
                 ),
                 const SizedBox(height: 16),
 
-                // 4. Email
                 _buildEditFormField(
                   context: context,
                   label: 'Email',
@@ -532,7 +511,6 @@ class ProfileView extends GetView<ProfileController> {
                 ),
                 const SizedBox(height: 30),
 
-                // Tombol Simpan dan Batal
                 Row(
                   children: [
                     // Tombol Batal
@@ -563,9 +541,7 @@ class ProfileView extends GetView<ProfileController> {
                       flex: 2,
                       child: ElevatedButton(
                         onPressed: () {
-                          // Implementasi logika simpan informasi
                           Navigator.pop(context);
-                          // Tambahkan logika untuk memperbarui informasi di sini
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFFFB300),
@@ -595,7 +571,6 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                   ],
                 ),
-                // Extra padding untuk bottom area
                 SizedBox(
                     height:
                         MediaQuery.of(context).padding.bottom > 0 ? 20 : 10),
@@ -607,7 +582,6 @@ class ProfileView extends GetView<ProfileController> {
     );
   }
 
-  // Widget untuk form field pada modal edit
   Widget _buildEditFormField({
     required BuildContext context,
     required String label,
@@ -680,7 +654,6 @@ class ProfileView extends GetView<ProfileController> {
       ),
       child: Row(
         children: [
-          // Icon container
           Container(
             padding: const EdgeInsets.all(6),
             decoration: BoxDecoration(
@@ -691,7 +664,6 @@ class ProfileView extends GetView<ProfileController> {
           ),
           const SizedBox(width: 12),
 
-          // Label and Value
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

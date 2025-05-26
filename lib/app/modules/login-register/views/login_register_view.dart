@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:tabungin/app/modules/login/views/login_view.dart'; // Pastikan impor file yang berisi LoginView
-import 'package:tabungin/app/modules/register/views/register_view.dart'; // Impor file RegisterView
+import 'package:tabungin/app/modules/login/views/login_view.dart'; 
+import 'package:tabungin/app/modules/register/views/register_view.dart'; 
 
 class LoginRegisterPage extends StatelessWidget {
   const LoginRegisterPage({super.key});
@@ -59,7 +59,7 @@ class LoginRegisterPage extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF252D70),
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           vertical: 13.0,
                           horizontal: 115,
                         ),
@@ -67,7 +67,7 @@ class LoginRegisterPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         'LOGIN',
                         style: TextStyle(
                           color: Colors.white,

@@ -5,7 +5,7 @@ import 'package:tabungin/app/modules/lupa_pw/views/lupa_pw_view.dart';
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
-  // Hardcoded credentials
+  // Hardcoded 
   static const String validEmail = "aku@gmail.com";
   static const String validPassword = "aku123";
 
@@ -38,7 +38,7 @@ class LoginView extends StatelessWidget {
             ),
             Divider(),
             ListTile(
-              leading: CircleAvatar(
+              leading: const CircleAvatar(
                 backgroundColor: Colors.blueGrey,
                 child: Text("S", style: TextStyle(color: Colors.white)),
               ),
@@ -53,7 +53,7 @@ class LoginView extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: CircleAvatar(
+              leading: const CircleAvatar(
                 backgroundColor: Colors.orange,
                 child: Text("M", style: TextStyle(color: Colors.white)),
               ),
@@ -73,7 +73,6 @@ class LoginView extends StatelessWidget {
               title: Text("Use another account"),
               onTap: () {
                 Navigator.of(context).pop();
-                // Simulate another account selection
               },
             ),
           ],
@@ -94,22 +93,20 @@ class LoginView extends StatelessWidget {
 
   void _login(BuildContext context, String email, String password) {
     if (email.trim() == validEmail && password == validPassword) {
-      // Login successful
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomeView()),
       );
     } else {
-      // Login failed - show error dialog
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text("Login Gagal"),
-          content: Text("Email atau password salah. Silakan coba lagi."),
+          title: const Text("Login Gagal"),
+          content: const Text("Email atau password salah. Silakan coba lagi."),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text("OK"),
+              child: const Text("OK"),
             ),
           ],
         ),
