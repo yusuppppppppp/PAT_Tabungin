@@ -49,16 +49,6 @@ class _QRCodeViewState extends State<QRCodeView> {
     }
   }
 
-  /// Ensures smooth bidirectional zoom handling
-  Future<void> setCameraZoom(double zoom) async {
-    try {
-      await controller.setZoomScale(zoom);
-    } catch (e) {
-      // Handle potential zoom errors
-      debugPrint("Error setting zoom: $e");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,32 +90,7 @@ class _QRCodeViewState extends State<QRCodeView> {
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
           ),
-          // Zoom Slider
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.remove),
-                Expanded(
-                  child: Slider(
-                    value: zoomLevel,
-                    min: 1.0,
-                    max: 2.0,
-                    divisions: 10, // Optional: Divisions for smoother control
-                    label: "Zoom: ${zoomLevel.toStringAsFixed(1)}x",
-                    onChanged: (value) async {
-                      setState(() {
-                        zoomLevel = value;
-                      });
-                      await setCameraZoom(zoomLevel); // Adjust camera zoom
-                    },
-                  ),
-                ),
-                const Icon(Icons.add),
-              ],
-            ),
-          ),
+          const SizedBox(height: 40),
         ],
       ),
     );
